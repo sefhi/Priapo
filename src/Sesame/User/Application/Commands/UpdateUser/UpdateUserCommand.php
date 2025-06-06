@@ -12,10 +12,9 @@ final readonly class UpdateUserCommand implements Command
         public string $id,
         public string $name,
         public string $email,
-        public string $password,
         public \DateTimeImmutable $createdAt,
         public \DateTimeImmutable $updatedAt,
-        public \DateTimeImmutable $deletedAt,
+        public ?\DateTimeImmutable $deletedAt,
     ) {
     }
 }
