@@ -99,10 +99,10 @@ create-db/test:
 
 migrate: migrate/dev migrate/test
 migrate/dev:
-	@$(SYMFONY)  doctrine:migrations:migrate --env=dev
+	@$(SYMFONY)  doctrine:migrations:migrate --env=dev --no-interaction
 
 migrate/test:
-	@$(SYMFONY)  doctrine:migrations:migrate --env=test
+	@$(SYMFONY)  doctrine:migrations:migrate --env=test --no-interaction
 
 migration/diff:
 	@$(SYMFONY)  doctrine:migrations:diff

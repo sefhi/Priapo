@@ -18,18 +18,6 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: false
         mappings:
-            BookStore:
-                type: xml
-                is_bundle: false
-                dir: '%kernel.project_dir%/src/BookStore/Infrastructure/Persistence/Doctrine/Mapping/Entities'
-                prefix: 'App\BookStore\Domain\Entities'
-                alias: BookStore
-            BookStore_ValueObjects:
-                type: xml
-                is_bundle: false
-                dir: '%kernel.project_dir%/src/BookStore/Infrastructure/Persistence/Doctrine/Mapping/ValueObjects'
-                prefix: 'App\BookStore\Domain\ValueObjects'
-                alias: BookStoreValueObjects
             Shared_ValueObjects:
                 type: xml
                 is_bundle: false

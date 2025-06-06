@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Health\Application\Query\Response;
+namespace App\Health\Application\Queries\Response;
 
 use App\Shared\Domain\Bus\Query\QueryResponse;
 

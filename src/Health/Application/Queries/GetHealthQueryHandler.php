@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Health\Application\Query;
+namespace App\Health\Application\Queries;
 
-use App\Health\Application\Query\Response\GetHealthQueryResponse;
+use App\Health\Application\Queries\Response\GetHealthQueryResponse;
 use App\Health\Domain\HealthRepository;
 use App\Shared\Domain\Bus\Query\QueryHandler;
 use App\Shared\Domain\Bus\Query\QueryResponse;
