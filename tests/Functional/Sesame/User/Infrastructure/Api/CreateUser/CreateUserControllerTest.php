@@ -21,7 +21,7 @@ final class CreateUserControllerTest extends BaseApiTestCase
             'name'      => MotherCreator::name(),
             'email'     => MotherCreator::email(),
             'password'  => MotherCreator::password(),
-            'createdAt' => MotherCreator::dateTime(),
+            'createdAt' => new \DateTimeImmutable()->format('Y-m-d H:i:s'),
         ];
 
         // WHEN

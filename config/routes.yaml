@@ -2,3 +2,7 @@ Health:
     prefix: /api/health
     resource: ../src/Health/Infrastructure/Api/routes.yaml
     trailing_slash_on_root: false
+Users:
+    prefix: /api/users
+    resource: ../src/Sesame/User/Infrastructure/Api/routes.yaml
+    trailing_slash_on_root: false

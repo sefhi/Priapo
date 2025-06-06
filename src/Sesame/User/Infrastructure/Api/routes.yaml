@@ -1,0 +1,4 @@
+CreateUser:
+  path: /
+  controller: App\Sesame\User\Infrastructure\Api\CreateUser\CreateUserController
+  methods: [POST]
