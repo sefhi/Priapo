@@ -13,7 +13,6 @@ final class CreateUserController extends BaseController
     public function __invoke(
         #[MapRequestPayload] CreateUserRequest $request,
     ): Response {
-
         $this->commandBus->command($request->toCreateUserCommand());
 
         return new Response(status: Response::HTTP_CREATED);

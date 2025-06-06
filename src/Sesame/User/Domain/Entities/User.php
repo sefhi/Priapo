@@ -89,4 +89,30 @@ final class User extends AggregateRoot
     {
         return $this->timestamps;
     }
+
+    public function createdAt(): \DateTimeImmutable
+    {
+        return $this->timestamps->createdAt();
+    }
+
+    public function updatedAt(): ?\DateTimeImmutable
+    {
+        return $this->timestamps->updatedAt();
+    }
+
+    public function update(
+        string $name,
+        string $email,
+        \DateTimeImmutable $createdAt,
+        ?\DateTimeImmutable $updatedAt,
+        ?\DateTimeImmutable $deletedAt,
+    ): void {
+        $this->name       = new UserName($name);
+        $this->email      = new Email($email);
+        $this->timestamps = Timestamps::create(
+            $createdAt,
+            $updatedAt,
+            $deletedAt,
+        );
+    }
 }
