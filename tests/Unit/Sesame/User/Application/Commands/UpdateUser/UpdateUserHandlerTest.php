@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Sesame\User\Application\Commands\UpdateUser;
 
 use App\Sesame\User\Application\Commands\UpdateUser\UpdateUserHandler;
+use App\Sesame\User\Domain\Entities\User;
 use App\Sesame\User\Domain\Exceptions\UserNotFoundException;
 use App\Sesame\User\Domain\Repositories\UserFindRepository;
 use App\Sesame\User\Domain\Repositories\UserSaveRepository;
@@ -61,7 +62,7 @@ final class UpdateUserHandlerTest extends TestCase
             ->method('save')
             ->with(
                 self::callback(
-                    fn ($user) => $user->id()->equals($userExpected->id())
+                    fn (User $user) => $user->id()->equals($userExpected->id())
                         && $user->createdAt() === $userExpected->createdAt()
                         && false === is_null($user->updatedAt())
                         && $user->name()->value() === $nameExpected
