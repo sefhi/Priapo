@@ -18,6 +18,24 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: false
         mappings:
+            User:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Sesame/User/Infrastructure/Persistence/Doctrine/Mapping/Entities'
+                prefix: 'App\Sesame\User\Domain\Entities'
+                alias: User
+            User_ValueObjects:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Sesame/User/Infrastructure/Persistence/Doctrine/Mapping/ValueObjects'
+                prefix: 'App\Sesame\User\Domain\ValueObjects'
+                alias: UserValueObjects
+            WorkEntry:
+                type: xml
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Sesame/WorkEntry/Infrastructure/Persistence/Doctrine/Mapping/Entities'
+                prefix: 'App\Sesame\WorkEntry\Domain\Entities'
+                alias: WorkEntry
             Shared_ValueObjects:
                 type: xml
                 is_bundle: false

@@ -21,35 +21,28 @@ final class MotherCreator
         return self::random();
     }
 
-    public static function isbn(): string
+    public static function id(): string
     {
-        return 0 === random_int(0, 1)
-            ? self::random()->isbn10()
-            : self::random()->isbn13();
+        return self::random()->uuid();
     }
 
-    public static function title(): string
+    public static function email(): string
     {
-        return self::random()->sentence(3);
+        return self::random()->email();
     }
 
-    public static function author(): string
+    public static function name(): string
     {
         return self::random()->name();
     }
 
-    public static function description(): string
+    public static function password(): string
     {
-        return self::random()->text();
+        return self::random()->password();
     }
 
-    public static function stock(): int
+    public static function dateTime(): \DateTimeImmutable
     {
-        return self::random()->numberBetween(1, 100);
-    }
-
-    public static function id(): string
-    {
-        return self::random()->uuid();
+        return \DateTimeImmutable::createFromMutable(self::random()->dateTime());
     }
 }
