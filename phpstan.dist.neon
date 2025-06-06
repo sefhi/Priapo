@@ -1,0 +1,6 @@
+parameters:
+	excludePaths:
+		- tests
+	level: max
+	paths: ['src']
+	checkExplicitMixed: false
