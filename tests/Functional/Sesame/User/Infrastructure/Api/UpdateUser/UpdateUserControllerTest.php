@@ -52,4 +52,33 @@ final class UpdateUserControllerTest extends BaseApiTestCase
         self::assertResponseIsSuccessful();
         self::assertResponseStatusCodeSame(Response::HTTP_OK);
     }
+
+    #[Test]
+    public function itShouldReturnAnStatusCodeNotFoundWhenUserNotFound(): void
+    {
+        // GIVEN
+        $userId  = MotherCreator::id();
+        $payload = [
+            'name'      => MotherCreator::name(),
+            'email'     => MotherCreator::email(),
+            'createdAt' => new \DateTimeImmutable()->format(\DateTimeInterface::ATOM),
+            'updatedAt' => new \DateTimeImmutable()->format(\DateTimeInterface::ATOM),
+        ];
+
+        // WHEN
+        $this->client()
+            ->request(
+                'PUT',
+                'api/users/' . $userId,
+                [],
+                [],
+                ['CONTENT_TYPE' => 'application/json'],
+                json_encode($payload)
+            );
+
+        $this->client()->getResponse();
+
+        // THEN
+        self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
+    }
 }
