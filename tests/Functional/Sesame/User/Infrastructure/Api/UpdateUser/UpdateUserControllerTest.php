@@ -7,15 +7,26 @@ namespace Functional\Sesame\User\Infrastructure\Api\UpdateUser;
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\Functional\BaseApiTestCase;
-use Tests\Utils\MotherCreator;
+use Tests\Unit\Sesame\User\Domain\Entities\UserMother;
+use Tests\Utils\Factory\User\UserFactory;
+use Tests\Utils\Mother\MotherCreator;
 
 final class UpdateUserControllerTest extends BaseApiTestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->userFactory = new UserFactory($this->factoryPersistence());
+    }
+
     #[Test]
     public function itShouldUpdateUser(): void
     {
         // GIVEN
-        $userId = MotherCreator::id();
+        $userCreated = UserMother::random();
+        $this->userFactory->createOne($userCreated);
+
+        $userId = $userCreated->id();
 
         $payload = [
             'name'      => MotherCreator::name(),

@@ -7,7 +7,7 @@ namespace Functional\Sesame\User\Infrastructure\Api\CreateUser;
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\Functional\BaseApiTestCase;
-use Tests\Utils\MotherCreator;
+use Tests\Utils\Mother\MotherCreator;
 
 final class CreateUserControllerTest extends BaseApiTestCase
 {

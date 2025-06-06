@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Sesame\User\Application\Commands\UpdateUser;
 
 use App\Sesame\User\Application\Commands\UpdateUser\UpdateUserCommand;
-use Tests\Utils\MotherCreator;
+use Tests\Utils\Mother\MotherCreator;
 
 final class UpdateUserCommandMother
 {

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Sesame\WorkEntry\Domain\Entities;
 
 use App\Sesame\WorkEntry\Domain\Entities\WorkEntry;
-use Tests\Utils\MotherCreator;
+use Tests\Utils\Mother\MotherCreator;
 
 final class WorkEntryMother
 {

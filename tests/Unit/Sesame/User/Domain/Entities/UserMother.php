@@ -6,7 +6,7 @@ namespace Tests\Unit\Sesame\User\Domain\Entities;
 
 use App\Sesame\User\Application\Commands\CreateUser\CreateUserCommand;
 use App\Sesame\User\Domain\Entities\User;
-use Tests\Utils\MotherCreator;
+use Tests\Utils\Mother\MotherCreator;
 
 final class UserMother
 {

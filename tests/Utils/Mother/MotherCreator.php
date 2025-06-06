@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Utils;
+namespace Tests\Utils\Mother;
 
 use Faker\Factory;
 use Faker\Generator;
