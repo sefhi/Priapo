@@ -115,4 +115,14 @@ final class User extends AggregateRoot
             $deletedAt,
         );
     }
+
+    public function deletedAt(): ?\DateTimeImmutable
+    {
+        return $this->timestamps->deletedAt();
+    }
+
+    public function delete(): void
+    {
+        $this->timestamps = $this->timestamps->delete();
+    }
 }
