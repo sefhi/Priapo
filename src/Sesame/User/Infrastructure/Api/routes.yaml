@@ -7,3 +7,8 @@ UpdateUser:
   path: /{id}
   controller: App\Sesame\User\Infrastructure\Api\UpdateUser\UpdateUserController
   methods: [PUT]
+
+DeleteUser:
+  path: /{id}
+  controller: App\Sesame\User\Infrastructure\Api\DeleteUser\DeleteUserController
+  methods: [DELETE]

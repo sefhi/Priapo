@@ -6,6 +6,9 @@ namespace App\Sesame\User\Application\Commands\UpdateUser;
 
 use App\Shared\Domain\Bus\Command\Command;
 
+/**
+ * @see UpdateUserHandler
+ */
 final readonly class UpdateUserCommand implements Command
 {
     public function __construct(

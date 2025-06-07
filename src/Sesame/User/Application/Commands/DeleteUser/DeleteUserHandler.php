@@ -7,9 +7,10 @@ namespace App\Sesame\User\Application\Commands\DeleteUser;
 use App\Sesame\User\Domain\Exceptions\UserNotFoundException;
 use App\Sesame\User\Domain\Repositories\UserFindRepository;
 use App\Sesame\User\Domain\Repositories\UserSaveRepository;
+use App\Shared\Domain\Bus\Command\CommandHandler;
 use Ramsey\Uuid\Uuid;
 
-final readonly class DeleteUserHandler
+final readonly class DeleteUserHandler implements CommandHandler
 {
     public function __construct(
         private UserSaveRepository $userSaveRepository,
