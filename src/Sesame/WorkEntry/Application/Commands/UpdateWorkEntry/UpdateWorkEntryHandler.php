@@ -8,9 +8,10 @@ use App\Sesame\User\Domain\Services\EnsureExistsUserByIdService;
 use App\Sesame\WorkEntry\Domain\Exceptions\WorkEntryNotFoundException;
 use App\Sesame\WorkEntry\Domain\Repositories\WorkEntryFindRepository;
 use App\Sesame\WorkEntry\Domain\Repositories\WorkEntrySaveRepository;
+use App\Shared\Domain\Bus\Command\CommandHandler;
 use Ramsey\Uuid\Uuid;
 
-final readonly class UpdateWorkEntryHandler
+final readonly class UpdateWorkEntryHandler implements CommandHandler
 {
     public function __construct(
         private WorkEntrySaveRepository $workEntrySaveRepository,
