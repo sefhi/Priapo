@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Sesame\WorkEntry\Domain\Entities;
 
+use App\Sesame\WorkEntry\Application\Commands\CreateWorkEntry\CreateWorkEntryCommand;
 use App\Sesame\WorkEntry\Domain\Entities\WorkEntry;
 use Tests\Utils\Mother\MotherCreator;
 
@@ -54,6 +55,16 @@ final class WorkEntryMother
             userId: $finalData['userId'],
             startDate: $finalData['startDate'],
             createdAt: $finalData['createdAt'],
+        );
+    }
+
+    public static function fromCreateWorkEntryCommand(CreateWorkEntryCommand $command): WorkEntry
+    {
+        return WorkEntry::start(
+            id: $command->id,
+            userId: $command->userId,
+            startDate: $command->startDate,
+            createdAt: $command->createdAt,
         );
     }
 }
