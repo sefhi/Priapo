@@ -6,10 +6,10 @@ namespace App\Sesame\User\Application\Queries\FindUserById;
 
 use App\Sesame\User\Domain\Exceptions\UserNotFoundException;
 use App\Sesame\User\Domain\Repositories\UserFindRepository;
-use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shared\Domain\Bus\Query\QueryHandler;
 use Ramsey\Uuid\Uuid;
 
-final class FindUserByIdHandler implements CommandHandler
+final class FindUserByIdHandler implements QueryHandler
 {
     public function __construct(
         private UserFindRepository $userFindRepository,

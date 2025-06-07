@@ -14,7 +14,12 @@ final readonly class DoctrineUserFindRepository extends DoctrineRepository imple
     public function findById(UuidInterface $id): ?User
     {
         /** @var User|null $result */
-        $result = $this->repository(User::class)->findOneBy(['id' => $id]);
+        $result = $this->repository(User::class)->findOneBy(
+            [
+                'id'                   => $id,
+                'timestamps.deletedAt' => null,
+            ]
+        );
 
         return $result;
     }

@@ -12,3 +12,8 @@ DeleteUser:
   path: /{id}
   controller: App\Sesame\User\Infrastructure\Api\DeleteUser\DeleteUserController
   methods: [DELETE]
+
+FindUserById:
+  path: /{id}
+  controller: App\Sesame\User\Infrastructure\Api\FindUserById\FindUserByIdController
+  methods: [GET]

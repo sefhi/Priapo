@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Sesame\User\Application\Queries\FindUserById;
 
 use App\Sesame\User\Domain\Entities\User;
+use App\Shared\Domain\Bus\Query\QueryResponse;
 
-final readonly class UserResponse implements \JsonSerializable
+final readonly class UserResponse implements \JsonSerializable, QueryResponse
 {
     public function __construct(
         public string $id,

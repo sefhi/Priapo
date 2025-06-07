@@ -22,6 +22,7 @@ final class UserMother
             'password'  => MotherCreator::password(),
             'createdAt' => $createdAt,
             'updatedAt' => $updatedAt,
+            'deletedAt' => null,
         ];
 
         $finalData = array_merge($randomData, $overrides);
@@ -33,6 +34,7 @@ final class UserMother
             password: $finalData['password'],
             createdAt: $finalData['createdAt'],
             updatedAt: $finalData['updatedAt'],
+            deletedAt: $finalData['deletedAt'],
         );
     }
 
