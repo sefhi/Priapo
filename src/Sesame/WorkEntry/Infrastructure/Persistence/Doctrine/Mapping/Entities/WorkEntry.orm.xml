@@ -10,6 +10,10 @@
         <field name="startDate" type="datetime"/>
         <field name="endDate" type="datetime"/>
         <embedded name="timestamps" class="App\Shared\Domain\ValueObjects\Timestamps" use-column-prefix="false"/>
+
+        <indexes>
+            <index name="idx_work_entry_user_id" columns="user_id"/>
+        </indexes>
     </entity>
 
 </doctrine-mapping>
