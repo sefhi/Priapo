@@ -4,27 +4,21 @@ declare(strict_types=1);
 
 namespace App\Sesame\User\Application\Queries\FindUserById;
 
-use App\Sesame\User\Domain\Exceptions\UserNotFoundException;
-use App\Sesame\User\Domain\Repositories\UserFindRepository;
+use App\Sesame\User\Domain\Services\EnsureExistsUserByIdService;
 use App\Shared\Domain\Bus\Query\QueryHandler;
 use Ramsey\Uuid\Uuid;
 
-final class FindUserByIdHandler implements QueryHandler
+final readonly class FindUserByIdHandler implements QueryHandler
 {
     public function __construct(
-        private UserFindRepository $userFindRepository,
+        private EnsureExistsUserByIdService $ensureExistsUserByIdService,
     ) {
     }
 
     public function __invoke(FindUserByIdQuery $query): UserResponse
     {
         $userId = Uuid::fromString($query->id);
-        $user   = $this->userFindRepository->findById($userId);
 
-        if (null === $user) {
-            throw UserNotFoundException::withId($userId);
-        }
-
-        return UserResponse::fromUser($user);
+        return UserResponse::fromUser(($this->ensureExistsUserByIdService)($userId));
     }
 }

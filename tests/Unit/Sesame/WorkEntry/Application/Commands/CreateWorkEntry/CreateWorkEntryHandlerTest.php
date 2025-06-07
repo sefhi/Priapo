@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Sesame\WorkEntry\Application\Commands\CreateWorkEntry;
 
+use App\Sesame\User\Domain\Services\EnsureExistsUserByIdService;
 use App\Sesame\WorkEntry\Application\Commands\CreateWorkEntry\CreateWorkEntryHandler;
 use App\Sesame\WorkEntry\Domain\Repositories\WorkEntrySaveRepository;
 use PHPUnit\Framework\Attributes\Test;
@@ -14,11 +15,14 @@ use Tests\Unit\Sesame\WorkEntry\Domain\Entities\WorkEntryMother;
 final class CreateWorkEntryHandlerTest extends TestCase
 {
     private WorkEntrySaveRepository|MockObject $workEntryRepository;
+    private EnsureExistsUserByIdService|MockObject $ensureExistsUserByIdService;
+    private CreateWorkEntryHandler $handler;
 
     protected function setUp(): void
     {
-        $this->workEntryRepository = $this->createMock(WorkEntrySaveRepository::class);
-        $this->handler             = new CreateWorkEntryHandler($this->workEntryRepository);
+        $this->workEntryRepository         = $this->createMock(WorkEntrySaveRepository::class);
+        $this->ensureExistsUserByIdService = $this->createMock(EnsureExistsUserByIdService::class);
+        $this->handler                     = new CreateWorkEntryHandler($this->workEntryRepository);
     }
 
     #[Test]

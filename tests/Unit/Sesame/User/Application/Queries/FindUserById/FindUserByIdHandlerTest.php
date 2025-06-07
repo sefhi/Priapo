@@ -7,8 +7,7 @@ namespace Tests\Unit\Sesame\User\Application\Queries\FindUserById;
 use App\Sesame\User\Application\Queries\FindUserById\FindUserByIdHandler;
 use App\Sesame\User\Application\Queries\FindUserById\FindUserByIdQuery;
 use App\Sesame\User\Application\Queries\FindUserById\UserResponse;
-use App\Sesame\User\Domain\Exceptions\UserNotFoundException;
-use App\Sesame\User\Domain\Repositories\UserFindRepository;
+use App\Sesame\User\Domain\Services\EnsureExistsUserByIdService;
 use PHPUnit\Framework\Attributes\Test;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -17,13 +16,13 @@ use Tests\Utils\Mother\MotherCreator;
 
 final class FindUserByIdHandlerTest extends TestCase
 {
-    private UserFindRepository|MockObject $userRepository;
+    private EnsureExistsUserByIdService|MockObject $userRepository;
     private FindUserByIdHandler $handler;
 
     protected function setUp(): void
     {
-        $this->userRepository = $this->createMock(UserFindRepository::class);
-        $this->handler        = new FindUserByIdHandler($this->userRepository);
+        $this->service = $this->createMock(EnsureExistsUserByIdService::class);
+        $this->handler = new FindUserByIdHandler($this->service);
     }
 
     #[Test]
@@ -38,9 +37,9 @@ final class FindUserByIdHandlerTest extends TestCase
 
         // WHEN
 
-        $this->userRepository
+        $this->service
             ->expects(self::once())
-            ->method('findById')
+            ->method('__invoke')
             ->with($userId)
             ->willReturn($userFind);
 
@@ -50,28 +49,5 @@ final class FindUserByIdHandlerTest extends TestCase
 
         self::assertInstanceOf(UserResponse::class, $result);
         self::assertEquals($userResponseExpected, $result);
-    }
-
-    #[Test]
-    public function itShouldThrownAnUserNotFoundExceptionWhenNotFoundUser(): void
-    {
-        // GIVEN
-        $userId = MotherCreator::id();
-        $query  = new FindUserByIdQuery($userId);
-
-        // WHEN
-
-        $this->userRepository
-            ->expects(self::once())
-            ->method('findById')
-            ->with($userId)
-            ->willReturn(null);
-
-        // THEN
-
-        $this->expectException(UserNotFoundException::class);
-        $this->expectExceptionMessage('User with id ' . $userId . ' not found');
-
-        ($this->handler)($query);
     }
 }
