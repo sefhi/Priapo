@@ -7,3 +7,8 @@ UpdateWorkEntry:
   path: /{id}
   controller: App\Sesame\WorkEntry\Infrastructure\Api\UpdateWorkEntry\UpdateWorkEntryController
   methods: [PUT]
+
+DeleteWorkEntry:
+  path: /{id}
+  controller: App\Sesame\WorkEntry\Infrastructure\Api\DeleteWorkEntry\DeleteWorkEntryController
+  methods: [DELETE]
