@@ -81,4 +81,22 @@ final class WorkEntry extends AggregateRoot
     {
         return $this->timestamps;
     }
+
+    public function update(
+        string $userId,
+        \DateTimeImmutable $startDate,
+        \DateTimeImmutable $endDate,
+        \DateTimeImmutable $createdAt,
+        \DateTimeImmutable $updatedAt,
+        ?\DateTimeImmutable $deletedAt,
+    ): void {
+        $this->userId     = Uuid::fromString($userId);
+        $this->startDate  = $startDate;
+        $this->endDate    = $endDate;
+        $this->timestamps = Timestamps::create(
+            $createdAt,
+            $updatedAt,
+            $deletedAt,
+        );
+    }
 }

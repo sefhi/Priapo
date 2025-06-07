@@ -1,0 +1,112 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tests\Unit\Sesame\WorkEntry\Application\Commands\UpdateWorkEntry;
+
+use App\Sesame\User\Domain\Services\EnsureExistsUserByIdService;
+use App\Sesame\WorkEntry\Application\Commands\UpdateWorkEntry\UpdateWorkEntryHandler;
+use App\Sesame\WorkEntry\Domain\Exceptions\WorkEntryNotFoundException;
+use App\Sesame\WorkEntry\Domain\Repositories\WorkEntryFindRepository;
+use App\Sesame\WorkEntry\Domain\Repositories\WorkEntrySaveRepository;
+use PHPUnit\Framework\Attributes\Test;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
+use Ramsey\Uuid\Uuid;
+use Tests\Unit\Sesame\User\Domain\Entities\UserMother;
+use Tests\Unit\Sesame\WorkEntry\Domain\Entities\WorkEntryMother;
+use Tests\Utils\Mother\MotherCreator;
+
+final class UpdateWorkEntryHandlerTest extends TestCase
+{
+    private WorkEntrySaveRepository|MockObject $workEntrySaveRepository;
+    private WorkEntryFindRepository|MockObject $workEntryFindRepository;
+    private EnsureExistsUserByIdService|MockObject $ensureExistsUserByIdService;
+    private UpdateWorkEntryHandler $handler;
+
+    protected function setUp(): void
+    {
+        $this->workEntrySaveRepository     = $this->createMock(WorkEntrySaveRepository::class);
+        $this->workEntryFindRepository     = $this->createMock(WorkEntryFindRepository::class);
+        $this->ensureExistsUserByIdService = $this->createMock(EnsureExistsUserByIdService::class);
+
+        $this->handler = new UpdateWorkEntryHandler(
+            $this->workEntrySaveRepository,
+            $this->workEntryFindRepository,
+            $this->ensureExistsUserByIdService,
+        );
+    }
+
+    #[Test]
+    public function itShouldUpdateWorkEntry(): void
+    {
+        // GIVEN
+
+        $userId  = Uuid::fromString(MotherCreator::id());
+        $command = UpdateWorkEntryCommandMother::random(['userId' => $userId->toString()]);
+
+        $workEntryFind = WorkEntryMother::random(
+            ['id' => $command->id, 'userId' => $command->userId],
+        );
+        $workEntryExpected = WorkEntryMother::fromUpdateWorkEntryCommand($command);
+        $userExpected      = UserMother::random(['id' => $userId->toString()]);
+
+        // WHEN
+
+        $this->ensureExistsUserByIdService
+            ->expects(self::once())
+            ->method('__invoke')
+            ->with($userId)
+            ->willReturn($userExpected);
+
+        $this->workEntryFindRepository
+            ->expects(self::once())
+            ->method('findById')
+            ->with(Uuid::fromString($command->id))
+            ->willReturn($workEntryFind);
+
+        $this->workEntrySaveRepository
+            ->expects(self::once())
+            ->method('save')
+            ->with($workEntryExpected);
+
+        // THEN
+
+        ($this->handler)($command);
+    }
+
+    #[Test]
+    public function itShouldThrowWorkEntryExceptionWhenWorkEntryNotFound(): void
+    {
+        // GIVEN
+
+        $userId  = Uuid::fromString(MotherCreator::id());
+        $command = UpdateWorkEntryCommandMother::random(['userId' => $userId->toString()]);
+
+        $userExpected = UserMother::random(['id' => $userId->toString()]);
+
+        // WHEN
+
+        $this->ensureExistsUserByIdService
+            ->expects(self::once())
+            ->method('__invoke')
+            ->with($userId)
+            ->willReturn($userExpected);
+
+        $this->workEntryFindRepository
+            ->expects(self::once())
+            ->method('findById')
+            ->with(Uuid::fromString($command->id))
+            ->willReturn(null);
+
+        $this->workEntrySaveRepository
+            ->expects(self::never())
+            ->method('save');
+
+        // THEN
+
+        $this->expectException(WorkEntryNotFoundException::class);
+        $this->expectExceptionMessage('Work entry with id ' . $command->id . ' not found.');
+        ($this->handler)($command);
+    }
+}
