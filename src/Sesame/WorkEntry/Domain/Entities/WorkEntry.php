@@ -99,4 +99,14 @@ final class WorkEntry extends AggregateRoot
             $deletedAt,
         );
     }
+
+    public function isDeleted(): bool
+    {
+        return $this->timestamps->isDeleted();
+    }
+
+    public function delete(): void
+    {
+        $this->timestamps = $this->timestamps->delete();
+    }
 }

@@ -5,9 +5,8 @@ declare(strict_types=1);
 namespace App\Sesame\WorkEntry\Application\Commands\UpdateWorkEntry;
 
 use App\Sesame\User\Domain\Services\EnsureExistsUserByIdService;
-use App\Sesame\WorkEntry\Domain\Exceptions\WorkEntryNotFoundException;
-use App\Sesame\WorkEntry\Domain\Repositories\WorkEntryFindRepository;
 use App\Sesame\WorkEntry\Domain\Repositories\WorkEntrySaveRepository;
+use App\Sesame\WorkEntry\Domain\Services\EnsureExistWorkEntryByIdService;
 use App\Shared\Domain\Bus\Command\CommandHandler;
 use Ramsey\Uuid\Uuid;
 
@@ -15,7 +14,7 @@ final readonly class UpdateWorkEntryHandler implements CommandHandler
 {
     public function __construct(
         private WorkEntrySaveRepository $workEntrySaveRepository,
-        private WorkEntryFindRepository $workEntryFindRepository,
+        private EnsureExistWorkEntryByIdService $ensureExistWorkEntryByIdService,
         private EnsureExistsUserByIdService $ensureExistsUserByIdService,
     ) {
     }
@@ -27,11 +26,7 @@ final readonly class UpdateWorkEntryHandler implements CommandHandler
 
         ($this->ensureExistsUserByIdService)($userId);
 
-        $workEntry = $this->workEntryFindRepository->findById($workEntryId);
-
-        if (null === $workEntry) {
-            throw WorkEntryNotFoundException::withId($workEntryId);
-        }
+        $workEntry = ($this->ensureExistWorkEntryByIdService)($workEntryId);
 
         $workEntry->update(
             $command->userId,
