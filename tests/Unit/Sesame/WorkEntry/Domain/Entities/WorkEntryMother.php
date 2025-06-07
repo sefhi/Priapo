@@ -32,20 +32,20 @@ final class WorkEntryMother
         return WorkEntry::make(
             id: $finalData['id'],
             userId: $finalData['userId'],
-            startDate: $finalData['startDate'],
             createdAt: $finalData['createdAt'],
+            startDate: $finalData['startDate'],
             endDate: $finalData['endDate'],
             updatedAt: $finalData['updatedAt'],
             deletedAt: $finalData['deletedAt'],
         );
     }
 
-    public static function start(array $overrides = []): WorkEntry
+    public static function create(array $overrides = []): WorkEntry
     {
         $randomData = [
             'id'        => MotherCreator::id(),
             'userId'    => MotherCreator::id(),
-            'startDate' => MotherCreator::dateTime(),
+            'startDate' => null,
             'endDate'   => null,
             'createdAt' => MotherCreator::dateTime(),
             'updatedAt' => null,
@@ -53,7 +53,7 @@ final class WorkEntryMother
 
         $finalData = array_merge($randomData, $overrides);
 
-        return WorkEntry::start(
+        return WorkEntry::create(
             id: $finalData['id'],
             userId: $finalData['userId'],
             startDate: $finalData['startDate'],
@@ -63,7 +63,7 @@ final class WorkEntryMother
 
     public static function fromCreateWorkEntryCommand(CreateWorkEntryCommand $command): WorkEntry
     {
-        return WorkEntry::start(
+        return WorkEntry::create(
             id: $command->id,
             userId: $command->userId,
             startDate: $command->startDate,
@@ -76,8 +76,8 @@ final class WorkEntryMother
         return WorkEntry::make(
             id: $command->id,
             userId: $command->userId,
-            startDate: $command->startDate,
             createdAt: $command->createdAt,
+            startDate: $command->startDate,
             endDate: $command->endDate,
             updatedAt: $command->updatedAt,
         );

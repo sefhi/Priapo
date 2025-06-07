@@ -12,9 +12,9 @@ final readonly class WorkEntryResponse implements \JsonSerializable, QueryRespon
     public function __construct(
         public string $id,
         public string $userId,
-        public \DateTimeImmutable $startDate,
-        public ?\DateTimeImmutable $endDate,
         public \DateTimeImmutable $createdAt,
+        public ?\DateTimeImmutable $startDate,
+        public ?\DateTimeImmutable $endDate,
         public ?\DateTimeImmutable $updatedAt,
     ) {
     }
@@ -24,9 +24,9 @@ final readonly class WorkEntryResponse implements \JsonSerializable, QueryRespon
         return new self(
             $workEntry->id()->toString(),
             $workEntry->userId()->toString(),
+            $workEntry->createdAt(),
             $workEntry->startDate(),
             $workEntry->endDate(),
-            $workEntry->createdAt(),
             $workEntry->updatedAt(),
         );
     }
@@ -39,7 +39,7 @@ final readonly class WorkEntryResponse implements \JsonSerializable, QueryRespon
         return [
             'id'        => $this->id,
             'userId'    => $this->userId,
-            'startDate' => $this->startDate->format(\DateTimeInterface::ATOM),
+            'startDate' => $this->startDate?->format(\DateTimeInterface::ATOM),
             'endDate'   => $this->endDate?->format(\DateTimeInterface::ATOM),
             'createdAt' => $this->createdAt->format(\DateTimeInterface::ATOM),
             'updatedAt' => $this->updatedAt?->format(\DateTimeInterface::ATOM),

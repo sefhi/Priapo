@@ -24,7 +24,7 @@ final readonly class CreateWorkEntryHandler implements CommandHandler
 
         ($this->ensureExistsUserByIdService)($userId);
 
-        $workEntry = WorkEntry::start(
+        $workEntry = WorkEntry::create(
             id: $command->id,
             userId: $command->userId,
             startDate: $command->startDate,
