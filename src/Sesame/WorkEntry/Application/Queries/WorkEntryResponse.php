@@ -7,7 +7,7 @@ namespace App\Sesame\WorkEntry\Application\Queries;
 use App\Sesame\WorkEntry\Domain\Entities\WorkEntry;
 use App\Shared\Domain\Bus\Query\QueryResponse;
 
-final readonly class WorkEntryResponse implements QueryResponse
+final readonly class WorkEntryResponse implements \JsonSerializable, QueryResponse
 {
     public function __construct(
         public string $id,
@@ -29,5 +29,20 @@ final readonly class WorkEntryResponse implements QueryResponse
             $workEntry->createdAt(),
             $workEntry->updatedAt(),
         );
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id'        => $this->id,
+            'userId'    => $this->userId,
+            'startDate' => $this->startDate->format(\DateTimeInterface::ATOM),
+            'endDate'   => $this->endDate?->format(\DateTimeInterface::ATOM),
+            'createdAt' => $this->createdAt->format(\DateTimeInterface::ATOM),
+            'updatedAt' => $this->updatedAt?->format(\DateTimeInterface::ATOM),
+        ];
     }
 }

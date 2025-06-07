@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Sesame\WorkEntry\Application\Queries;
 
 use App\Sesame\WorkEntry\Domain\Services\EnsureExistWorkEntryByIdService;
-use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shared\Domain\Bus\Query\QueryHandler;
 use Ramsey\Uuid\Uuid;
 
-final readonly class FindWorkEntryByIdHandler implements CommandHandler
+final readonly class FindWorkEntryByIdHandler implements QueryHandler
 {
     public function __construct(
         private EnsureExistWorkEntryByIdService $ensureExistWorkEntryByIdService,

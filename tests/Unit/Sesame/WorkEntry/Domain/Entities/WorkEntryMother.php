@@ -24,6 +24,7 @@ final class WorkEntryMother
             'endDate'   => $createdAt->modify('+1 hour'),
             'createdAt' => $createdAt,
             'updatedAt' => $updatedAt,
+            'deletedAt' => null,
         ];
 
         $finalData = array_merge($randomData, $overrides);
@@ -35,6 +36,7 @@ final class WorkEntryMother
             createdAt: $finalData['createdAt'],
             endDate: $finalData['endDate'],
             updatedAt: $finalData['updatedAt'],
+            deletedAt: $finalData['deletedAt'],
         );
     }
 
