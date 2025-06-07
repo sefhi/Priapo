@@ -75,6 +75,16 @@ final class User extends AggregateRoot
         return $this->name;
     }
 
+    public function nameValue(): string
+    {
+        return $this->name->value();
+    }
+
+    public function emailValue(): string
+    {
+        return $this->email->value();
+    }
+
     public function email(): Email
     {
         return $this->email;
