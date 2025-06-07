@@ -6,6 +6,8 @@ namespace Tests\Unit\Sesame\TimeTracking\Application\Commands;
 
 use App\Sesame\TimeTracking\Application\Commands\ClockIn\ClockInCommand;
 use App\Sesame\TimeTracking\Application\Commands\ClockIn\ClockInHandler;
+use App\Sesame\TimeTracking\Domain\Exceptions\WorkEntryAlreadyClockedInException;
+use App\Sesame\TimeTracking\Domain\Exceptions\WorkEntryAlreadyClockedOutException;
 use App\Sesame\WorkEntry\Domain\Entities\WorkEntry;
 use App\Sesame\WorkEntry\Domain\Repositories\WorkEntrySaveRepository;
 use App\Sesame\WorkEntry\Domain\Services\EnsureExistWorkEntryByIdService;
@@ -63,6 +65,83 @@ final class ClockInHandlerTest extends TestCase
             );
 
         // THEN
+
+        ($this->handler)($command);
+    }
+
+    #[Test]
+    public function itShouldThrowAnExceptionWhenWorkEntryClockInPreviously(): void
+    {
+        // GIVEN
+
+        $workEntryId = Uuid::fromString(MotherCreator::id());
+        $command     = new ClockInCommand(
+            workEntryId: $workEntryId->toString(),
+            startDate: new \DateTimeImmutable(),
+        );
+
+        $workEntryFind = WorkEntryMother::create(
+            [
+                'id'        => $workEntryId->toString(),
+                'startDate' => new \DateTimeImmutable(),
+            ]
+        );
+
+        // WHEN
+
+        $this->ensureExistsWorkEntryByIdService
+            ->expects(self::once())
+            ->method('__invoke')
+            ->with($workEntryId)
+            ->willReturn($workEntryFind);
+
+        $this->workEntrySaveRepository
+            ->expects(self::never())
+            ->method('save');
+
+        // THEN
+
+        $this->expectException(WorkEntryAlreadyClockedInException::class);
+        $this->expectExceptionMessage(sprintf('Work entry with id %s already clocked in', $workEntryId));
+
+        ($this->handler)($command);
+    }
+
+    #[Test]
+    public function itShouldThrowAnExceptionWhenWorkEntryClockOutPreviously(): void
+    {
+        // GIVEN
+
+        $workEntryId = Uuid::fromString(MotherCreator::id());
+        $command     = new ClockInCommand(
+            workEntryId: $workEntryId->toString(),
+            startDate: new \DateTimeImmutable(),
+        );
+
+        $workEntryFind = WorkEntryMother::random(
+            [
+                'id'        => $workEntryId->toString(),
+                'startDate' => new \DateTimeImmutable(),
+                'endDate'   => new \DateTimeImmutable(),
+            ]
+        );
+
+        // WHEN
+
+        $this->ensureExistsWorkEntryByIdService
+            ->expects(self::once())
+            ->method('__invoke')
+            ->with($workEntryId)
+            ->willReturn($workEntryFind);
+
+        $this->workEntrySaveRepository
+            ->expects(self::never())
+            ->method('save');
+
+        // THEN
+
+        $this->expectException(WorkEntryAlreadyClockedOutException::class);
+        $this->expectExceptionMessage(sprintf('Work entry with id %s already clocked out', $workEntryId));
 
         ($this->handler)($command);
     }
