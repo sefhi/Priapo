@@ -109,4 +109,14 @@ final class WorkEntry extends AggregateRoot
     {
         $this->timestamps = $this->timestamps->delete();
     }
+
+    public function createdAt(): \DateTimeImmutable
+    {
+        return $this->timestamps->createdAt();
+    }
+
+    public function updatedAt(): ?\DateTimeImmutable
+    {
+        return $this->timestamps->updatedAt();
+    }
 }
