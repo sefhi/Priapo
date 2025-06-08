@@ -14,6 +14,8 @@ use Ramsey\Uuid\UuidInterface;
 
 final class User extends AggregateRoot
 {
+    private bool $isPasswordHashed = false;
+
     private function __construct(
         private UuidInterface $id,
         private UserName $name,
@@ -62,6 +64,19 @@ final class User extends AggregateRoot
                 null,
                 null
             )
+        );
+    }
+
+    public function withPasswordHashed(string $password): self
+    {
+        $this->isPasswordHashed = true;
+
+        return new self(
+            $this->id,
+            $this->name,
+            $this->email,
+            new UserPassword($password),
+            $this->timestamps,
         );
     }
 
