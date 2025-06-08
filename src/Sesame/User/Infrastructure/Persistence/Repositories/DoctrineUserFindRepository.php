@@ -23,4 +23,17 @@ final readonly class DoctrineUserFindRepository extends DoctrineRepository imple
 
         return $result;
     }
+
+    public function findByEmail(string $email): ?User
+    {
+        /** @var User|null $result */
+        $result = $this->repository(User::class)->findOneBy(
+            [
+                'email.value'          => $email,
+                'timestamps.deletedAt' => null,
+            ]
+        );
+
+        return $result;
+    }
 }
