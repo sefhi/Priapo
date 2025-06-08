@@ -15,7 +15,7 @@ final readonly class SymfonyAuthenticatedUserProvider implements AuthenticatedUs
     ) {
     }
 
-    public function currentUser(): ?User
+    public function currentUser(): User
     {
         $token = $this->tokenStorage->getToken();
 
@@ -23,7 +23,7 @@ final readonly class SymfonyAuthenticatedUserProvider implements AuthenticatedUs
             throw new \RuntimeException('No authentication token found');
         }
 
-        /** @var UserAdapter $userAdapter */
+        /** @var UserAdapter|null $userAdapter */
         $userAdapter = $token->getUser();
 
         if (!$userAdapter instanceof UserAdapter) {

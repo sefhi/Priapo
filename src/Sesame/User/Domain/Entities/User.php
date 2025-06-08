@@ -157,4 +157,9 @@ final class User extends AggregateRoot
     {
         return $this->isPasswordHashed;
     }
+
+    public function passwordValue(): string
+    {
+        return $this->password->value();
+    }
 }

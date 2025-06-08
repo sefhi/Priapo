@@ -27,16 +27,25 @@ final readonly class UserAdapter implements UserInterface, PasswordAuthenticated
 
     public function eraseCredentials(): void
     {
-        // Nothing to erase as we don't store sensitive data in this object
+        // TODO implement
     }
 
+    /**
+     * @return non-empty-string
+     */
     public function getUserIdentifier(): string
     {
-        return $this->user->emailValue();
+        $email = $this->user->emailValue();
+
+        if (empty($email)) {
+            throw new \RuntimeException('email cannot be empty');
+        }
+
+        return $email;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string
     {
-        return $this->user->password()->value();
+        return $this->user->passwordValue();
     }
 }
