@@ -134,4 +134,9 @@ final class WorkEntry extends AggregateRoot
     {
         return null !== $this->endDate && null !== $this->startDate;
     }
+
+    public function clockOut(?\DateTimeImmutable $endDate): void
+    {
+        $this->endDate = $endDate ?? new \DateTimeImmutable();
+    }
 }

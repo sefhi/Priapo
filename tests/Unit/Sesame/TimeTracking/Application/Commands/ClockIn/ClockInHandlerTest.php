@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Sesame\TimeTracking\Application\Commands;
+namespace Tests\Unit\Sesame\TimeTracking\Application\Commands\ClockIn;
 
 use App\Sesame\TimeTracking\Application\Commands\ClockIn\ClockInCommand;
 use App\Sesame\TimeTracking\Application\Commands\ClockIn\ClockInHandler;
