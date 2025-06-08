@@ -3,6 +3,10 @@ CreateUser:
   controller: App\Sesame\User\Infrastructure\Api\CreateUser\CreateUserController
   methods: [POST]
 
+MeUser:
+  path: /me
+  controller: App\Sesame\User\Infrastructure\Api\Me\MeController
+
 UpdateUser:
   path: /{id}
   controller: App\Sesame\User\Infrastructure\Api\UpdateUser\UpdateUserController

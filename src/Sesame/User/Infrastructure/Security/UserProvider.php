@@ -62,6 +62,6 @@ final readonly class UserProvider implements UserProviderInterface, PasswordUpgr
 
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
-        //TODO implement
+        // TODO implement
     }
 }
