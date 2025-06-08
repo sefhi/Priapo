@@ -12,7 +12,7 @@ final class CreateUserRequest
         public string $id,
         public string $name,
         public string $email,
-        public string $password,
+        #[\SensitiveParameter] public string $plainPassword,
         public string $createdAt,
     ) {
     }
@@ -23,7 +23,7 @@ final class CreateUserRequest
             $this->id,
             $this->name,
             $this->email,
-            $this->password,
+            $this->plainPassword,
             new \DateTimeImmutable($this->createdAt),
         );
     }

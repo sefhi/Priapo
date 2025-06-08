@@ -15,7 +15,7 @@ final readonly class CreateUserCommand implements Command
         public string $id,
         public string $name,
         public string $email,
-        public string $password,
+        #[\SensitiveParameter] public string $plainPassword,
         public \DateTimeImmutable $createdAt,
     ) {
     }

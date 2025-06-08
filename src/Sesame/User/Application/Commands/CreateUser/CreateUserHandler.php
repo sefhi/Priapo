@@ -22,7 +22,7 @@ final readonly class CreateUserHandler implements CommandHandler
             $command->id,
             $command->name,
             $command->email,
-            $command->password,
+            $command->plainPassword,
             $command->createdAt,
         );
 
