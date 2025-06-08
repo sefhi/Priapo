@@ -19,7 +19,7 @@ class BaseApiTestCase extends WebTestCase
     private ?KernelBrowser $client;
     private EntityManagerInterface $entityManager;
     private PersistenceInterface $factoryPersistence;
-    private User $admin;
+    private User $userLogged;
 
     protected function setUp(): void
     {
@@ -49,6 +49,11 @@ class BaseApiTestCase extends WebTestCase
         return $this->factoryPersistence;
     }
 
+    protected function getUserLogged(): User
+    {
+        return $this->userLogged;
+    }
+
     /**
      * @throws \Exception
      *
@@ -56,9 +61,9 @@ class BaseApiTestCase extends WebTestCase
      */
     private function ensureAuthenticatedInTest(): void
     {
-        $this->admin = UserMother::admin();
-        $userAdmin   = new UserFactory($this->factoryPersistence);
-        $userAdmin->createOne($this->admin);
-        $this->client->loginUser(new UserAdapter($this->admin));
+        $this->userLogged = UserMother::admin();
+        $userAdmin        = new UserFactory($this->factoryPersistence);
+        $userAdmin->createOne($this->userLogged);
+        $this->client->loginUser(new UserAdapter($this->userLogged));
     }
 }
