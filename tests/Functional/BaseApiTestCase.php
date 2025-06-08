@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace Tests\Functional;
 
+use App\Sesame\User\Domain\Entities\User;
+use App\Sesame\User\Infrastructure\Security\UserAdapter;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Tests\Unit\Sesame\User\Domain\Entities\UserMother;
 use Tests\Utils\Factory\DoctrinePersistence;
 use Tests\Utils\Factory\PersistenceInterface;
+use Tests\Utils\Factory\User\UserFactory;
 
 class BaseApiTestCase extends WebTestCase
 {
     private ?KernelBrowser $client;
     private EntityManagerInterface $entityManager;
     private PersistenceInterface $factoryPersistence;
+    private User $admin;
 
     protected function setUp(): void
     {
@@ -25,6 +30,8 @@ class BaseApiTestCase extends WebTestCase
         $this->factoryPersistence = new DoctrinePersistence($this->entityManager);
 
         $this->entityManager->beginTransaction();
+
+        $this->ensureAuthenticatedInTest();
     }
 
     protected function tearDown(): void
@@ -40,5 +47,18 @@ class BaseApiTestCase extends WebTestCase
     public function factoryPersistence(): PersistenceInterface
     {
         return $this->factoryPersistence;
+    }
+
+    /**
+     * @throws \Exception
+     *
+     * @return void
+     */
+    private function ensureAuthenticatedInTest(): void
+    {
+        $this->admin = UserMother::admin();
+        $userAdmin   = new UserFactory($this->factoryPersistence);
+        $userAdmin->createOne($this->admin);
+        $this->client->loginUser(new UserAdapter($this->admin));
     }
 }

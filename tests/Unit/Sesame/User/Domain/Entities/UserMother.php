@@ -60,6 +60,17 @@ final class UserMother
         );
     }
 
+    public static function admin(): User
+    {
+        return self::create(
+            [
+                'name'     => 'admin',
+                'email'    => 'admin@app.es',
+                'password' => 't@hi$si_smypAs5w0rD',
+            ]
+        );
+    }
+
     public static function fromCreateUserCommand(CreateUserCommand $command): User
     {
         return self::create(
