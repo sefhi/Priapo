@@ -10,7 +10,7 @@ WorkEntries:
     prefix: /api/work-entries
     resource: ../src/Sesame/WorkEntry/Infrastructure/Api/routes.yaml
     trailing_slash_on_root: false
-api_login_check:
-    path: /api/login_check
+ApiLogin:
+    path: /api/login
     methods: [POST]
 
