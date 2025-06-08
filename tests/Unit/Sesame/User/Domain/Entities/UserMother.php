@@ -67,7 +67,7 @@ final class UserMother
                 'id'        => $command->id,
                 'name'      => $command->name,
                 'email'     => $command->email,
-                'password'  => $command->password,
+                'password'  => $command->plainPassword,
                 'createdAt' => $command->createdAt,
             ]
         );

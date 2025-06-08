@@ -10,4 +10,6 @@ use Ramsey\Uuid\UuidInterface;
 interface UserFindRepository
 {
     public function findById(UuidInterface $id): ?User;
+
+    public function findByEmail(string $email): ?User;
 }

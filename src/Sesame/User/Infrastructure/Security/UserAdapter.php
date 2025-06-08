@@ -22,8 +22,6 @@ final readonly class UserAdapter implements UserInterface, PasswordAuthenticated
 
     public function getRoles(): array
     {
-        // In a real application, you might want to store roles in the User entity
-        // For now, we'll just return a default role
         return ['ROLE_USER'];
     }
 
