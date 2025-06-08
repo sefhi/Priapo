@@ -69,15 +69,17 @@ final class User extends AggregateRoot
 
     public function withPasswordHashed(string $password): self
     {
-        $this->isPasswordHashed = true;
-
-        return new self(
+        $user = new self(
             $this->id,
             $this->name,
             $this->email,
             new UserPassword($password),
             $this->timestamps,
         );
+
+        $user->isPasswordHashed = true;
+
+        return $user;
     }
 
     public function id(): UuidInterface
@@ -149,5 +151,10 @@ final class User extends AggregateRoot
     public function delete(): void
     {
         $this->timestamps = $this->timestamps->delete();
+    }
+
+    public function isPasswordHashed(): bool
+    {
+        return $this->isPasswordHashed;
     }
 }

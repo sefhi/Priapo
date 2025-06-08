@@ -27,7 +27,7 @@ final class CreateUserCommandMother
             id: $finalData['id'],
             name: $finalData['name'],
             email: $finalData['email'],
-            password: $finalData['password'],
+            plainPassword: $finalData['password'],
             createdAt: $finalData['createdAt'],
         );
     }

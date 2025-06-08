@@ -17,11 +17,11 @@ final class CreateUserControllerTest extends BaseApiTestCase
         // GIVEN
 
         $payload = [
-            'id'        => MotherCreator::id(),
-            'name'      => MotherCreator::name(),
-            'email'     => MotherCreator::email(),
-            'password'  => MotherCreator::password(),
-            'createdAt' => new \DateTimeImmutable()->format('Y-m-d H:i:s'),
+            'id'            => MotherCreator::id(),
+            'name'          => MotherCreator::name(),
+            'email'         => MotherCreator::email(),
+            'plainPassword' => MotherCreator::password(),
+            'createdAt'     => new \DateTimeImmutable()->format('Y-m-d H:i:s'),
         ];
 
         // WHEN
