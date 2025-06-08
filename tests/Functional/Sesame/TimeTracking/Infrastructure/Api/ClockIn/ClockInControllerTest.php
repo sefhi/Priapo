@@ -41,14 +41,14 @@ final class ClockInControllerTest extends BaseApiTestCase
         $this->workEntryFactory->createOne($workEntry);
 
         $payload = [
-            'startDate'   => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
+            'startDate' => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
         ];
 
         // WHEN
         $this->client()
             ->request(
                 'PATCH',
-                'api/work-entries/'.$workEntryId.'/clock-in',
+                'api/work-entries/' . $workEntryId . '/clock-in',
                 [],
                 [],
                 ['CONTENT_TYPE' => 'application/json'],

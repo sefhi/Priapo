@@ -45,14 +45,14 @@ final class ClockOutControllerTest extends BaseApiTestCase
         $this->workEntryFactory->createOne($workEntry);
 
         $payload = [
-            'endDate'     => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
+            'endDate' => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
         ];
 
         // WHEN
         $this->client()
             ->request(
                 'PATCH',
-                'api/work-entries/'.$workEntryId.'/clock-out',
+                'api/work-entries/' . $workEntryId . '/clock-out',
                 [],
                 [],
                 ['CONTENT_TYPE' => 'application/json'],
