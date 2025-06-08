@@ -13,6 +13,8 @@ use Tests\Utils\Mother\MotherCreator;
 
 final class UpdateUserControllerTest extends BaseApiTestCase
 {
+    private UserFactory $userFactory;
+
     protected function setUp(): void
     {
         parent::setUp();

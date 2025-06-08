@@ -16,7 +16,7 @@ use Tests\Utils\Mother\MotherCreator;
 
 final class FindUserByIdHandlerTest extends TestCase
 {
-    private EnsureExistsUserByIdService|MockObject $userRepository;
+    private EnsureExistsUserByIdService|MockObject $service;
     private FindUserByIdHandler $handler;
 
     protected function setUp(): void

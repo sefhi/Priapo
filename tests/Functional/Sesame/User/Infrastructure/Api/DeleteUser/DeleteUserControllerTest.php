@@ -13,6 +13,8 @@ use Tests\Utils\Mother\MotherCreator;
 
 final class DeleteUserControllerTest extends BaseApiTestCase
 {
+    private UserFactory $userFactory;
+
     protected function setUp(): void
     {
         parent::setUp();

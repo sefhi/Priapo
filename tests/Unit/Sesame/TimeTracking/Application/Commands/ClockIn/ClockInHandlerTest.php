@@ -22,6 +22,7 @@ final class ClockInHandlerTest extends TestCase
 {
     private WorkEntrySaveRepository|MockObject $workEntrySaveRepository;
     private EnsureExistWorkEntryByIdService|MockObject $ensureExistsWorkEntryByIdService;
+    private ClockInHandler $handler;
 
     protected function setUp(): void
     {

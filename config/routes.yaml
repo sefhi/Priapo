@@ -2,6 +2,9 @@ Health:
     prefix: /api/health
     resource: ../src/Health/Infrastructure/Api/routes.yaml
     trailing_slash_on_root: false
+ApiLogin:
+    path: /api/login
+    methods: [POST]
 Users:
     prefix: /api/users
     resource: ../src/Sesame/User/Infrastructure/Api/routes.yaml
@@ -10,7 +13,7 @@ WorkEntries:
     prefix: /api/work-entries
     resource: ../src/Sesame/WorkEntry/Infrastructure/Api/routes.yaml
     trailing_slash_on_root: false
-ApiLogin:
-    path: /api/login
-    methods: [POST]
-
+TimeTracking:
+    prefix: /api/work-entries
+    resource: ../src/Sesame/TimeTracking/Infrastructure/Api/routes.yaml
+    trailing_slash_on_root: false

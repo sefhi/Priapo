@@ -11,9 +11,9 @@ use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 
-class SymfonyExceptionListener
+readonly class SymfonyExceptionListener
 {
-    public function __construct(private readonly SymfonyExceptionsHttpStatusCodeMapping $exceptionMapping)
+    public function __construct(private SymfonyExceptionsHttpStatusCodeMapping $exceptionMapping)
     {
     }
 

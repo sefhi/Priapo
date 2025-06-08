@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Functional\Sesame\WorkEntry\Infrastructure\Api\DeleteWorkEntry;
+namespace Functional\Sesame\TimeTracking\Infrastructure\Api\ClockOut;
 
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +13,7 @@ use Tests\Utils\Factory\User\UserFactory;
 use Tests\Utils\Factory\WorkEntry\WorkEntryFactory;
 use Tests\Utils\Mother\MotherCreator;
 
-final class DeleteWorkEntryControllerTest extends BaseApiTestCase
+final class ClockOutControllerTest extends BaseApiTestCase
 {
     private UserFactory $userFactory;
     private WorkEntryFactory $workEntryFactory;
@@ -26,56 +26,43 @@ final class DeleteWorkEntryControllerTest extends BaseApiTestCase
     }
 
     #[Test]
-    public function itShouldDeleteWorkEntry(): void
+    public function itShouldClockOutWorkEntry(): void
     {
         // GIVEN
         $userId      = MotherCreator::id();
         $userCreated = UserMother::random(['id' => $userId]);
         $this->userFactory->createOne($userCreated);
 
-        $workEntryId      = MotherCreator::id();
-        $workEntryCreated = WorkEntryMother::random([
+        $workEntryId = MotherCreator::id();
+        $startDate   = MotherCreator::dateTime();
+        $workEntry   = WorkEntryMother::create([
             'id'     => $workEntryId,
             'userId' => $userId,
         ]);
-        $this->workEntryFactory->createOne($workEntryCreated);
+
+        // Clock in the work entry
+        $workEntry->clockIn($startDate);
+        $this->workEntryFactory->createOne($workEntry);
+
+        $payload = [
+            'endDate'     => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
+        ];
 
         // WHEN
         $this->client()
             ->request(
-                'DELETE',
-                'api/work-entries/' . $workEntryId,
+                'PATCH',
+                'api/work-entries/'.$workEntryId.'/clock-out',
                 [],
                 [],
-                ['CONTENT_TYPE' => 'application/json']
+                ['CONTENT_TYPE' => 'application/json'],
+                json_encode($payload)
             );
 
         $this->client()->getResponse();
 
         // THEN
         self::assertResponseIsSuccessful();
-        self::assertResponseStatusCodeSame(Response::HTTP_NO_CONTENT);
-    }
-
-    #[Test]
-    public function itShouldReturnAnStatusCodeNotFoundWhenWorkEntryNotFound(): void
-    {
-        // GIVEN
-        $workEntryId = MotherCreator::id();
-
-        // WHEN
-        $this->client()
-            ->request(
-                'DELETE',
-                'api/work-entries/' . $workEntryId,
-                [],
-                [],
-                ['CONTENT_TYPE' => 'application/json']
-            );
-
-        $this->client()->getResponse();
-
-        // THEN
-        self::assertResponseStatusCodeSame(Response::HTTP_NOT_FOUND);
+        self::assertResponseStatusCodeSame(Response::HTTP_OK);
     }
 }

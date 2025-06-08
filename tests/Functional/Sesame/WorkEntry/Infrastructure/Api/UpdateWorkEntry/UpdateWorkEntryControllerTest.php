@@ -15,6 +15,9 @@ use Tests\Utils\Mother\MotherCreator;
 
 final class UpdateWorkEntryControllerTest extends BaseApiTestCase
 {
+    private UserFactory $userFactory;
+    private WorkEntryFactory $workEntryFactory;
+
     protected function setUp(): void
     {
         parent::setUp();

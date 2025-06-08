@@ -14,6 +14,8 @@ use Tests\Utils\Mother\MotherCreator;
 
 final class FindUserByIdControllerTest extends BaseApiTestCase
 {
+    private UserFactory $userFactory;
+
     protected function setUp(): void
     {
         parent::setUp();
