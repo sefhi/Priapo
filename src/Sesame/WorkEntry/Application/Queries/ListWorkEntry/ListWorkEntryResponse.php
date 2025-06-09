@@ -24,11 +24,14 @@ final readonly class ListWorkEntryResponse implements QueryResponse, \JsonSerial
         return new self(
             array_map(
                 fn (WorkEntry $workEntry): WorkEntryResponse => WorkEntryResponse::fromWorkEntry($workEntry),
-                $workEntries->workEntries() ?? []
+                $workEntries->workEntries()
             )
         );
     }
 
+    /**
+     * @return WorkEntryResponse[]
+     */
     public function jsonSerialize(): array
     {
         return $this->workEntries;

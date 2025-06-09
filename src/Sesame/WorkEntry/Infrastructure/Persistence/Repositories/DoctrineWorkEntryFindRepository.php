@@ -15,7 +15,14 @@ use Ramsey\Uuid\UuidInterface;
 
 final readonly class DoctrineWorkEntryFindRepository extends DoctrineRepository implements WorkEntryFindRepository
 {
+    /**
+     * @var array<string,string>
+     */
     private array $criteriaToDoctrineFields;
+
+    /**
+     * @var array<string,mixed>
+     */
     private array $hydrators;
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -64,6 +71,9 @@ final readonly class DoctrineWorkEntryFindRepository extends DoctrineRepository 
             return WorkEntries::empty();
         }
 
-        return WorkEntries::fromArray($doctrineCollection->toArray());
+        /** @var array<int, WorkEntry> $workEntries */
+        $workEntries = $doctrineCollection->toArray();
+
+        return WorkEntries::fromArray($workEntries);
     }
 }
