@@ -16,8 +16,7 @@ final readonly class DoctrineUserFindRepository extends DoctrineRepository imple
         /** @var User|null $result */
         $result = $this->repository(User::class)->findOneBy(
             [
-                'id'                   => $id,
-                'timestamps.deletedAt' => null,
+                'id' => $id,
             ]
         );
 
@@ -29,8 +28,7 @@ final readonly class DoctrineUserFindRepository extends DoctrineRepository imple
         /** @var User|null $result */
         $result = $this->repository(User::class)->findOneBy(
             [
-                'email.value'          => $email,
-                'timestamps.deletedAt' => null,
+                'email.value' => $email,
             ]
         );
 

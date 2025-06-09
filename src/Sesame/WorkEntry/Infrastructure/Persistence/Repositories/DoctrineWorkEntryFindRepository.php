@@ -46,7 +46,6 @@ final readonly class DoctrineWorkEntryFindRepository extends DoctrineRepository 
         $result = $this->repository(WorkEntry::class)->findOneBy(
             [
                 'id'                   => $id,
-                'timestamps.deletedAt' => null,
             ]
         );
 
