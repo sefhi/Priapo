@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Tests\Unit\Sesame\WorkEntry\Application\Queries\ListWorkEntry;
 
+use App\Sesame\WorkEntry\Application\Queries\ListWorkEntry\ListWorkEntryHandler;
+use App\Sesame\WorkEntry\Application\Queries\ListWorkEntry\ListWorkEntryQuery;
+use App\Sesame\WorkEntry\Application\Queries\ListWorkEntry\ListWorkEntryResponse;
+use App\Sesame\WorkEntry\Domain\Collections\WorkEntries;
 use App\Sesame\WorkEntry\Domain\Repositories\WorkEntryFindRepository;
 use App\Shared\Domain\Criteria\FilterOperator;
 use App\Shared\Domain\Criteria\OrderType;
@@ -13,6 +17,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Tests\Unit\Sesame\WorkEntry\Domain\Entities\WorkEntryMother;
 use Tests\Unit\Shared\Domain\Criteria\CriteriaMother;
+use Tests\Unit\Shared\Domain\Criteria\FilterMother;
 use Tests\Unit\Shared\Domain\Criteria\FiltersMother;
 use Tests\Unit\Shared\Domain\Criteria\OrderByMother;
 use Tests\Unit\Shared\Domain\Criteria\OrderMother;
@@ -20,7 +25,6 @@ use Tests\Utils\Mother\MotherCreator;
 
 final class ListWorkEntryHandlerTest extends TestCase
 {
-
     private WorkEntryFindRepository|MockObject $workEntryFindRepository;
 
     protected function setUp(): void
@@ -41,9 +45,11 @@ final class ListWorkEntryHandlerTest extends TestCase
         $criteriaExpected = CriteriaMother::create(
             FiltersMother::create(
                 [
-                    'field' => 'userId',
-                    'operator' => FilterOperator::EQUAL->value,
-                    'value' => $userId,
+                    FilterMother::fromPrimitives(
+                        field: 'userId',
+                        operator: FilterOperator::EQUAL->value,
+                        value: $userId,
+                    ),
                 ]
             ),
             OrderMother::create(
@@ -52,7 +58,14 @@ final class ListWorkEntryHandlerTest extends TestCase
             )
         );
 
-        $workEntries      = [WorkEntryMother::random(['userId' => $userId]), WorkEntryMother::random(['userId' => $userId])];
+        $workEntriesExpected = WorkEntries::fromArray(
+            [
+                WorkEntryMother::random(['userId' => $userId]),
+                WorkEntryMother::random(['userId' => $userId]),
+            ],
+        );
+
+        $listWorkEntryResponseExpected = ListWorkEntryResponse::fromWorkEntries($workEntriesExpected);
 
         // WHEN
 
@@ -60,14 +73,13 @@ final class ListWorkEntryHandlerTest extends TestCase
             ->expects(self::once())
             ->method('searchAllByCriteria')
             ->with($criteriaExpected)
-            ->willReturn($workEntries);
+            ->willReturn($workEntriesExpected);
 
         $result = ($this->handler)($query);
 
         // THEN
 
         self::assertInstanceOf(ListWorkEntryResponse::class, $result);
+        self::assertEquals($listWorkEntryResponseExpected, $result);
     }
-
-
 }
