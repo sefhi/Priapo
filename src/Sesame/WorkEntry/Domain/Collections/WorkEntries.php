@@ -30,6 +30,11 @@ final readonly class WorkEntries extends Collection
         return $this->items();
     }
 
+    public static function empty(): self
+    {
+        return new self([]);
+    }
+
     protected function type(): string
     {
         return WorkEntry::class;

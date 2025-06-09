@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Sesame\WorkEntry\Application\Queries\ListWorkEntry;
 
 use App\Sesame\WorkEntry\Domain\Repositories\WorkEntryFindRepository;
-use App\Shared\Domain\Bus\Command\CommandHandler;
+use App\Shared\Domain\Bus\Query\QueryHandler;
 use App\Shared\Domain\Criteria\Criteria;
 use App\Shared\Domain\Criteria\Filter;
 use App\Shared\Domain\Criteria\FilterField;
@@ -18,7 +18,7 @@ use App\Shared\Domain\Criteria\OrderType;
 use App\Shared\Domain\Criteria\OrderTypes;
 use Ramsey\Uuid\Uuid;
 
-final readonly class ListWorkEntryHandler implements CommandHandler
+final readonly class ListWorkEntryHandler implements QueryHandler
 {
     public function __construct(private WorkEntryFindRepository $workEntryFindRepository)
     {

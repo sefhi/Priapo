@@ -1,3 +1,8 @@
+ListWorkEntry:
+  path: /
+  controller: App\Sesame\WorkEntry\Infrastructure\Api\ListWorkEntry\ListWorkEntryController
+  methods: [GET]
+
 CreateWorkEntry:
   path: /
   controller: App\Sesame\WorkEntry\Infrastructure\Api\CreateWorkEntry\CreateWorkEntryController
