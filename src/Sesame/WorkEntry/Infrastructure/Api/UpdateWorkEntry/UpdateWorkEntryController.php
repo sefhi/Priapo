@@ -9,6 +9,7 @@ use App\Sesame\WorkEntry\Domain\Exceptions\WorkEntryNotFoundException;
 use App\Shared\Api\BaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 final class UpdateWorkEntryController extends BaseController
 {
@@ -26,6 +27,7 @@ final class UpdateWorkEntryController extends BaseController
         return [
             WorkEntryNotFoundException::class => Response::HTTP_NOT_FOUND,
             UserNotFoundException::class      => Response::HTTP_NOT_FOUND,
+            UnprocessableEntityHttpException::class => Response::HTTP_BAD_REQUEST,
         ];
     }
 }

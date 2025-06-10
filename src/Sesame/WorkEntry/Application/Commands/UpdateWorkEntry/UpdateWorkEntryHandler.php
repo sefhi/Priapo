@@ -31,9 +31,9 @@ final readonly class UpdateWorkEntryHandler implements CommandHandler
         $workEntry->update(
             $command->userId,
             $command->startDate,
-            $command->endDate,
             $command->createdAt,
             $command->updatedAt,
+            $command->endDate,
             $command->deletedAt,
         );
 

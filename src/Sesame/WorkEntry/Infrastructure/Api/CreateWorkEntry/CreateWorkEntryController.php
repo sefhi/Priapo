@@ -8,6 +8,7 @@ use App\Sesame\User\Domain\Exceptions\UserNotFoundException;
 use App\Shared\Api\BaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 final class CreateWorkEntryController extends BaseController
 {
@@ -23,6 +24,7 @@ final class CreateWorkEntryController extends BaseController
     {
         return [
             UserNotFoundException::class => Response::HTTP_NOT_FOUND,
+            UnprocessableEntityHttpException::class => Response::HTTP_BAD_REQUEST,
         ];
     }
 }

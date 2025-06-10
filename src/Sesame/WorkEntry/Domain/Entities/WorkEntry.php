@@ -85,9 +85,9 @@ final class WorkEntry extends AggregateRoot
     public function update(
         string $userId,
         \DateTimeImmutable $startDate,
-        \DateTimeImmutable $endDate,
         \DateTimeImmutable $createdAt,
         \DateTimeImmutable $updatedAt,
+        ?\DateTimeImmutable $endDate,
         ?\DateTimeImmutable $deletedAt,
     ): void {
         $this->userId     = Uuid::fromString($userId);

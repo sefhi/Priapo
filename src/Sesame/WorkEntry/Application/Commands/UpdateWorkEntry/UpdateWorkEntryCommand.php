@@ -15,9 +15,9 @@ final readonly class UpdateWorkEntryCommand implements Command
         public string $id,
         public string $userId,
         public \DateTimeImmutable $startDate,
-        public \DateTimeImmutable $endDate,
         public \DateTimeImmutable $createdAt,
         public \DateTimeImmutable $updatedAt,
+        public ?\DateTimeImmutable $endDate = null,
         public ?\DateTimeImmutable $deletedAt = null,
     ) {
     }
