@@ -8,6 +8,7 @@ use App\Sesame\User\Application\Queries\Me\GetUserMeQuery;
 use App\Shared\Api\BaseController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 final class MeController extends BaseController
 {
@@ -18,6 +19,6 @@ final class MeController extends BaseController
 
     protected function exceptions(): array
     {
-        return [];
+        return [UnauthorizedHttpException::class => Response::HTTP_UNAUTHORIZED];
     }
 }

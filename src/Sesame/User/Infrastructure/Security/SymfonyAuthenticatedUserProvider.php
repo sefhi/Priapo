@@ -6,6 +6,7 @@ namespace App\Sesame\User\Infrastructure\Security;
 
 use App\Sesame\User\Domain\Entities\User;
 use App\Sesame\User\Domain\Security\AuthenticatedUserProvider;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 final readonly class SymfonyAuthenticatedUserProvider implements AuthenticatedUserProvider
@@ -20,14 +21,14 @@ final readonly class SymfonyAuthenticatedUserProvider implements AuthenticatedUs
         $token = $this->tokenStorage->getToken();
 
         if (!$token) {
-            throw new \RuntimeException('No authentication token found');
+            throw new UnauthorizedHttpException('Bearer', 'No authentication token found');
         }
 
         /** @var UserAdapter|null $userAdapter */
         $userAdapter = $token->getUser();
 
         if (!$userAdapter instanceof UserAdapter) {
-            throw new \RuntimeException('Invalid user type');
+            throw new UnauthorizedHttpException('Bearer','Invalid user type');
         }
 
         return $userAdapter->getUser();
