@@ -25,8 +25,8 @@ final class UpdateWorkEntryController extends BaseController
     protected function exceptions(): array
     {
         return [
-            WorkEntryNotFoundException::class => Response::HTTP_NOT_FOUND,
-            UserNotFoundException::class      => Response::HTTP_NOT_FOUND,
+            WorkEntryNotFoundException::class       => Response::HTTP_NOT_FOUND,
+            UserNotFoundException::class            => Response::HTTP_NOT_FOUND,
             UnprocessableEntityHttpException::class => Response::HTTP_BAD_REQUEST,
         ];
     }

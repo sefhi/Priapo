@@ -12,21 +12,20 @@ final class UpdateWorkEntryRequest
     public function __construct(
         #[Assert\NotBlank(message: '<userId> is required')]
         #[Assert\Uuid(message: '<userId> must be a valid UUID')]
-        public string  $userId,
+        public string $userId,
         #[Assert\NotBlank(message: '<startDate> is required')]
         #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<startDate> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
-        public string  $startDate,
+        public string $startDate,
         #[Assert\NotBlank(message: '<createdAt> is required')]
         #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<createdAt> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
-        public string  $createdAt,
+        public string $createdAt,
         #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<updateAt> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
         public ?string $updatedAt = null,
         #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<endDate> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
         public ?string $endDate = null,
         #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<deletedAt> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
         public ?string $deletedAt = null,
-    )
-    {
+    ) {
     }
 
     public function toUpdateWorkEntryCommand(string $id): UpdateWorkEntryCommand
