@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Functional\Sesame\WorkEntry\Infrastructure\Api\FindWorkEntryById;
+namespace Tests\Functional\Sesame\WorkEntry\Infrastructure\Api\FindWorkEntryById;
 
 use App\Sesame\WorkEntry\Application\Queries\WorkEntryResponse;
 use PHPUnit\Framework\Attributes\Test;

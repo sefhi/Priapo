@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Functional\Sesame\User\Infrastructure\Api\DeleteUser;
+namespace Tests\Functional\Sesame\User\Infrastructure\Api\DeleteUser;
 
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpFoundation\Response;

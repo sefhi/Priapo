@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Functional\Sesame\TimeTracking\Infrastructure\Api\ClockOut;
+namespace Tests\Functional\Sesame\TimeTracking\Infrastructure\Api\ClockOut;
 
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpFoundation\Response;

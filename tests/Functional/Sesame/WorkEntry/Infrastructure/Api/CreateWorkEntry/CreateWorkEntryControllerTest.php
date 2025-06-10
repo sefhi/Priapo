@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Functional\Sesame\WorkEntry\Infrastructure\Api\CreateWorkEntry;
+namespace Tests\Functional\Sesame\WorkEntry\Infrastructure\Api\CreateWorkEntry;
 
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpFoundation\Response;

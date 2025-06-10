@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Functional\Sesame\WorkEntry\Infrastructure\Api\ListWorkEntry;
+namespace Tests\Functional\Sesame\WorkEntry\Infrastructure\Api\ListWorkEntry;
 
 use App\Sesame\WorkEntry\Application\Queries\ListWorkEntry\ListWorkEntryResponse;
 use App\Sesame\WorkEntry\Domain\Collections\WorkEntries;

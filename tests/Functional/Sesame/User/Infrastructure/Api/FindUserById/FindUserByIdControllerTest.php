@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Functional\Sesame\User\Infrastructure\Api\FindUserById;
+namespace Tests\Functional\Sesame\User\Infrastructure\Api\FindUserById;
 
 use App\Sesame\User\Application\Queries\FindUserById\UserResponse;
 use PHPUnit\Framework\Attributes\Test;

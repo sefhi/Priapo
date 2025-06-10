@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Functional\Sesame\User\Infrastructure\Api\CreateUser;
+namespace Tests\Functional\Sesame\User\Infrastructure\Api\CreateUser;
 
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,7 +21,7 @@ final class CreateUserControllerTest extends BaseApiTestCase
             'name'          => MotherCreator::name(),
             'email'         => MotherCreator::email(),
             'plainPassword' => MotherCreator::password(),
-            'createdAt'     => new \DateTimeImmutable()->format('Y-m-d H:i:s'),
+            'createdAt'     => new \DateTimeImmutable()->format(\DateTimeInterface::ATOM),
         ];
 
         // WHEN

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Functional\Sesame\WorkEntry\Infrastructure\Api\DeleteWorkEntry;
+namespace Tests\Functional\Sesame\WorkEntry\Infrastructure\Api\DeleteWorkEntry;
 
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpFoundation\Response;
