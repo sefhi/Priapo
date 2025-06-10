@@ -28,7 +28,7 @@ final readonly class SymfonyAuthenticatedUserProvider implements AuthenticatedUs
         $userAdapter = $token->getUser();
 
         if (!$userAdapter instanceof UserAdapter) {
-            throw new UnauthorizedHttpException('Bearer','Invalid user type');
+            throw new UnauthorizedHttpException('Bearer', 'Invalid user type');
         }
 
         return $userAdapter->getUser();

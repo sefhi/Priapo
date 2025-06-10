@@ -7,6 +7,7 @@ namespace App\Sesame\User\Infrastructure\Api\CreateUser;
 use App\Shared\Api\BaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 final class CreateUserController extends BaseController
 {
@@ -20,6 +21,8 @@ final class CreateUserController extends BaseController
 
     protected function exceptions(): array
     {
-        return [];
+        return [
+            UnprocessableEntityHttpException::class => Response::HTTP_BAD_REQUEST,
+        ];
     }
 }

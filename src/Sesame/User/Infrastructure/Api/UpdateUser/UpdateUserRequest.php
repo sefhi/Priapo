@@ -22,12 +22,12 @@ final class UpdateUserRequest
         #[Assert\Email(message: '<email> must be a valid email address')]
         public string $email,
         #[Assert\NotBlank(message: '<createdAt> is required')]
-        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<createdAt> must be a valid date time in the format '.\DateTimeInterface::ATOM)]
+        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<createdAt> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
         public string $createdAt,
         #[Assert\NotNull(message: '<updatedAt> is required')]
-        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<updateAt> must be a valid date time in the format '. \DateTimeInterface::ATOM)]
+        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<updateAt> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
         public ?string $updatedAt = null,
-        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<deletedAt> must be a valid date time in the format '. \DateTimeInterface::ATOM)]
+        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<deletedAt> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
         public ?string $deletedAt = null,
     ) {
     }
@@ -39,7 +39,9 @@ final class UpdateUserRequest
             $this->name,
             $this->email,
             new \DateTimeImmutable($this->createdAt),
-            new \DateTimeImmutable($this->updatedAt),
+            $this->updatedAt
+                ? new \DateTimeImmutable($this->updatedAt)
+                : new \DateTimeImmutable(),
             $this->deletedAt
                 ? new \DateTimeImmutable($this->deletedAt)
                 : null,
