@@ -6,6 +6,7 @@ namespace App\Sesame\TimeTracking\Infrastructure\Api\ClockIn;
 
 use App\Sesame\TimeTracking\Domain\Exceptions\WorkEntryAlreadyClockedInException;
 use App\Sesame\TimeTracking\Domain\Exceptions\WorkEntryAlreadyClockedOutException;
+use App\Sesame\TimeTracking\Domain\Exceptions\WorkEntryNotBelongToUserException;
 use App\Sesame\WorkEntry\Domain\Exceptions\WorkEntryNotFoundException;
 use App\Shared\Api\BaseController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,7 +18,8 @@ final class ClockInController extends BaseController
         string $id,
         #[MapRequestPayload] ClockInRequest $request,
     ): Response {
-        $this->commandBus->command(command: $request->toClockInCommand(workEntryId: $id));
+        $user = $this->authenticatedUserProvider->currentUser();
+        $this->commandBus->command(command: $request->toClockInCommand(workEntryId: $id, userId: $user->id()->toString()));
 
         return new Response(status: Response::HTTP_OK);
     }
@@ -28,6 +30,7 @@ final class ClockInController extends BaseController
             WorkEntryNotFoundException::class          => Response::HTTP_NOT_FOUND,
             WorkEntryAlreadyClockedInException::class  => Response::HTTP_BAD_REQUEST,
             WorkEntryAlreadyClockedOutException::class => Response::HTTP_BAD_REQUEST,
+            WorkEntryNotBelongToUserException::class   => Response::HTTP_FORBIDDEN,
         ];
     }
 }

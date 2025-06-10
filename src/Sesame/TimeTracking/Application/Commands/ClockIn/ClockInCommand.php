@@ -13,7 +13,8 @@ final readonly class ClockInCommand implements Command
 {
     public function __construct(
         public string $workEntryId,
-        public ?\DateTimeImmutable $startDate = null,
+        public string $userId,
+        public \DateTimeImmutable $startDate = new \DateTimeImmutable(),
     ) {
     }
 }
