@@ -33,9 +33,22 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api/health, roles: PUBLIC_ACCESS }
-        - { path: ^/api/users, roles: PUBLIC_ACCESS }
-        - { path: ^/api/work-entries, roles: PUBLIC_ACCESS }
+        - { path: ^/api/login, roles: PUBLIC_ACCESS }
+
+        # WorkEntries
+        - { path: ^/api/work-entries/.+/clock-in$, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/work-entries/.+/clock-out$, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/work-entries/.+$, roles: IS_AUTHENTICATED_FULLY }
+
+        - { path: ^/api/work-entries$, roles: PUBLIC_ACCESS, methods: [GET, POST, PUT] }
+
+        # Users
         - { path: ^/api/users/me, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/users, roles: PUBLIC_ACCESS }
+
+        # By default
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+
 
 when@test:
     security:
