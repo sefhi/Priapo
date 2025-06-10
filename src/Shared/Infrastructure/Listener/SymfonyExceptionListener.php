@@ -8,6 +8,7 @@ use App\Shared\Infrastructure\Exceptions\SymfonyExceptionsHttpStatusCodeMapping;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\Messenger\Exception\HandlerFailedException;
 use Symfony\Component\Validator\Exception\ValidationFailedException;
 
@@ -32,6 +33,11 @@ readonly class SymfonyExceptionListener
             }
         }
 
+        if ($exception instanceof UnprocessableEntityHttpException) {
+            $body['errors'] = $this->parseErrorMessage($exception->getMessage());
+            unset($body['message']);
+        }
+
         // Exception on buses
         if ($exception instanceof HandlerFailedException) {
             $nestedExceptions = $exception->getWrappedExceptions();
@@ -53,5 +59,42 @@ readonly class SymfonyExceptionListener
                 $statusCodeFor
             )
         );
+    }
+
+    /**
+     * @param string $errorMessage
+     *
+     * @return array<array<string, string>>
+     */
+    private function parseErrorMessage(string $errorMessage): array
+    {
+        $lines = array_filter(
+            explode("\n", $errorMessage),
+            fn ($error) => !empty(trim($error))
+        );
+
+        $errors = [];
+
+        foreach ($lines as $line) {
+            $line = trim($line);
+
+            if (preg_match('/<(\w+)>/', $line, $matches)) {
+                $field   = $matches[1];
+                $message = 'The ' . preg_replace('/<(\w+)>/', $matches[1], $line);
+            } elseif (preg_match('/^(\w+)\s+/', $line, $matches)) {
+                $field   = $matches[1];
+                $message = 'The ' . $line;
+            } else {
+                $field   = 'unknown';
+                $message = $line;
+            }
+
+            $errors[] = [
+                'field'   => $field,
+                'message' => $message,
+            ];
+        }
+
+        return $errors;
     }
 }
