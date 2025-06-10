@@ -22,12 +22,12 @@ final class UpdateUserRequest
         #[Assert\Email(message: '<email> must be a valid email address')]
         public string $email,
         #[Assert\NotBlank(message: '<createdAt> is required')]
-        #[Assert\DateTime(format: 'Y-m-d H:i:s', message: '<createdAt> must be a valid date time in the format Y-m-d H:i:s')]
+        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<createdAt> must be a valid date time in the format '.\DateTimeInterface::ATOM)]
         public string $createdAt,
         #[Assert\NotNull(message: '<updatedAt> is required')]
-        #[Assert\DateTime(format: 'Y-m-d H:i:s', message: '<updateAt> must be a valid date time in the format Y-m-d H:i:s')]
+        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<updateAt> must be a valid date time in the format '. \DateTimeInterface::ATOM)]
         public ?string $updatedAt = null,
-        #[Assert\DateTime(format: 'Y-m-d H:i:s', message: '<deletedAt> must be a valid date time in the format Y-m-d H:i:s')]
+        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<deletedAt> must be a valid date time in the format '. \DateTimeInterface::ATOM)]
         public ?string $deletedAt = null,
     ) {
     }
