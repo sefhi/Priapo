@@ -10,7 +10,6 @@ use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\Functional\BaseApiTestCase;
 use Tests\Unit\Sesame\WorkEntry\Domain\Entities\WorkEntryMother;
-use Tests\Utils\Factory\User\UserFactory;
 use Tests\Utils\Factory\WorkEntry\WorkEntryFactory;
 
 final class ListWorkEntryControllerTest extends BaseApiTestCase
@@ -20,7 +19,6 @@ final class ListWorkEntryControllerTest extends BaseApiTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->userFactory      = new UserFactory($this->factoryPersistence());
         $this->workEntryFactory = new WorkEntryFactory($this->factoryPersistence());
     }
 

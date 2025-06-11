@@ -26,6 +26,7 @@ use Tests\Utils\Mother\MotherCreator;
 final class ListWorkEntryHandlerTest extends TestCase
 {
     private WorkEntryFindRepository|MockObject $workEntryFindRepository;
+    private ListWorkEntryHandler $handler;
 
     protected function setUp(): void
     {
