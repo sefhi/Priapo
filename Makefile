@@ -54,7 +54,10 @@ rebuild:
 	@echo "🔥 Rebuild container!!!"
 	@$(DOCKER_COMPOSE) build --pull --force-rm --no-cache
 	make start
-	make deps
+	make install
+
+install: deps jwt-keys installation-db
+	@echo "🎉 Complete installation finished ✅"
 
 # 🧪 Tests
 test: create_env_file
@@ -88,9 +91,11 @@ lint-diff:
 static-analysis:
 	@$(EXEC)  ./vendor/bin/phpstan analyse -c phpstan.dist.neon
 
+installation-db: create-db migrate
+	@echo "🗄️ Database installation completed ✅"
+
 rm-database:
 	@docker-compose rm -f database
-
 create-db: create-db/dev create-db/test
 create-db/dev:
 	@$(SYMFONY) doctrine:database:create --env=dev --no-interaction --if-not-exists
@@ -120,3 +125,12 @@ schema-validate/dev:
 	@$(SYMFONY)  doctrine:schema:validate
 schema-validate/test:
 	@$(SYMFONY)  doctrine:schema:validate --env=test
+
+jwt-keys:
+	@echo "🔐 Setting up JWT keypair..."
+	@if [ ! -f config/jwt/private.pem ]; then \
+		$(SYMFONY) lexik:jwt:generate-keypair; \
+		echo "JWT keypair generated ✅"; \
+	else \
+		echo "JWT keypair already exists ✅"; \
+	fi
