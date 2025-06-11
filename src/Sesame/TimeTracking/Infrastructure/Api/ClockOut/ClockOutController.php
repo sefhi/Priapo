@@ -17,7 +17,8 @@ final class ClockOutController extends BaseController
         string $id,
         #[MapRequestPayload] ClockOutRequest $request,
     ): Response {
-        $this->commandBus->command($request->toClockOutCommand(workEntryId: $id));
+        $user = $this->authenticatedUserProvider->currentUser();
+        $this->commandBus->command($request->toClockOutCommand(workEntryId: $id, userId: $user->id()->toString()));
 
         return new Response(status: Response::HTTP_OK);
     }

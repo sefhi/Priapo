@@ -13,7 +13,8 @@ final readonly class ClockOutCommand implements Command
 {
     public function __construct(
         public string $workEntryId,
-        public ?\DateTimeImmutable $endDate = null,
+        public string $userId,
+        public \DateTimeImmutable $endDate,
     ) {
     }
 }

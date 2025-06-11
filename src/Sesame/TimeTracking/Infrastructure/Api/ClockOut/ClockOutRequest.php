@@ -13,11 +13,16 @@ final class ClockOutRequest
     ) {
     }
 
-    public function toClockOutCommand(string $workEntryId): ClockOutCommand
-    {
+    public function toClockOutCommand(
+        string $workEntryId,
+        string $userId,
+    ): ClockOutCommand {
         return new ClockOutCommand(
             $workEntryId,
-            $this->endDate ? new \DateTimeImmutable($this->endDate) : null,
+            $userId,
+            $this->endDate
+                ? new \DateTimeImmutable($this->endDate)
+                : new \DateTimeImmutable(),
         );
     }
 }

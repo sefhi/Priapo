@@ -40,13 +40,16 @@ final class ClockOutHandlerTest extends TestCase
     {
         // GIVEN
         $workEntryId = Uuid::fromString(MotherCreator::id());
+        $userId      = Uuid::fromString(MotherCreator::id());
         $command     = new ClockOutCommand(
             workEntryId: $workEntryId->toString(),
+            userId: $userId->toString(),
             endDate: new \DateTimeImmutable(),
         );
 
         $workEntryFind = WorkEntryMother::create([
             'id'        => $workEntryId->toString(),
+            'userId'    => $userId->toString(),
             'startDate' => new \DateTimeImmutable(),
         ]);
 
@@ -75,14 +78,17 @@ final class ClockOutHandlerTest extends TestCase
     {
         // GIVEN
         $workEntryId = Uuid::fromString(MotherCreator::id());
+        $userId      = Uuid::fromString(MotherCreator::id());
         $command     = new ClockOutCommand(
             workEntryId: $workEntryId->toString(),
+            userId: $userId->toString(),
             endDate: new \DateTimeImmutable(),
         );
 
         $workEntryFind = WorkEntryMother::random(
             [
                 'id'        => $workEntryId->toString(),
+                'userId'    => $userId->toString(),
                 'startDate' => new \DateTimeImmutable(),
                 'endDate'   => new \DateTimeImmutable(),
             ]
@@ -111,14 +117,17 @@ final class ClockOutHandlerTest extends TestCase
     {
         // GIVEN
         $workEntryId = Uuid::fromString(MotherCreator::id());
+        $userId      = Uuid::fromString(MotherCreator::id());
         $command     = new ClockOutCommand(
             workEntryId: $workEntryId->toString(),
+            userId: $userId->toString(),
             endDate: new \DateTimeImmutable(),
         );
 
         $workEntryFind = WorkEntryMother::create(
             [
-                'id' => $workEntryId->toString(),
+                'id'     => $workEntryId->toString(),
+                'userId' => $userId->toString(),
             ]
         );
 

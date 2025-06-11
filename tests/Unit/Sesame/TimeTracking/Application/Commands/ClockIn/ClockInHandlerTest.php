@@ -41,12 +41,14 @@ final class ClockInHandlerTest extends TestCase
         // GIVEN
 
         $workEntryId = Uuid::fromString(MotherCreator::id());
+        $userId      = Uuid::fromString(MotherCreator::id());
         $command     = new ClockInCommand(
             workEntryId: $workEntryId->toString(),
+            userId: $userId->toString(),
             startDate: new \DateTimeImmutable(),
         );
 
-        $workEntryFind = WorkEntryMother::create(['id' => $workEntryId->toString()]);
+        $workEntryFind = WorkEntryMother::create(['id' => $workEntryId->toString(), 'userId' => $userId->toString()]);
 
         // WHEN
 
@@ -76,14 +78,17 @@ final class ClockInHandlerTest extends TestCase
         // GIVEN
 
         $workEntryId = Uuid::fromString(MotherCreator::id());
+        $userId      = Uuid::fromString(MotherCreator::id());
         $command     = new ClockInCommand(
             workEntryId: $workEntryId->toString(),
+            userId: $userId->toString(),
             startDate: new \DateTimeImmutable(),
         );
 
         $workEntryFind = WorkEntryMother::create(
             [
                 'id'        => $workEntryId->toString(),
+                'userId'    => $userId->toString(),
                 'startDate' => new \DateTimeImmutable(),
             ]
         );
@@ -114,14 +119,17 @@ final class ClockInHandlerTest extends TestCase
         // GIVEN
 
         $workEntryId = Uuid::fromString(MotherCreator::id());
+        $userId      = Uuid::fromString(MotherCreator::id());
         $command     = new ClockInCommand(
             workEntryId: $workEntryId->toString(),
+            userId: $userId->toString(),
             startDate: new \DateTimeImmutable(),
         );
 
         $workEntryFind = WorkEntryMother::random(
             [
                 'id'        => $workEntryId->toString(),
+                'userId'    => $userId->toString(),
                 'startDate' => new \DateTimeImmutable(),
                 'endDate'   => new \DateTimeImmutable(),
             ]

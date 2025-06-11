@@ -23,7 +23,7 @@ final class ClockInRequest
             $workEntryId,
             $userId,
             $this->startDate
-                ? new \DateTimeImmutable($this->startDate) : null,
+                ? new \DateTimeImmutable($this->startDate) : new \DateTimeImmutable(),
         );
     }
 }
