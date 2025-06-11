@@ -1,0 +1,423 @@
+{
+	"info": {
+		"_postman_id": "95ca46f8-36c9-451d-a966-aa3bc58cc754",
+		"name": "Sesame",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "861953",
+		"_collection_link": "https://crimson-crater-3768.postman.co/workspace/My-Workspace~7f6e25c0-f863-44cb-8f5b-90cb6d508797/collection/861953-95ca46f8-36c9-451d-a966-aa3bc58cc754?action=share&source=collection_link&creator=861953"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer ",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{$randomUUID}}\",\n    \"name\": \"{{$randomUserName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"plainPassword\": \"qwerty69\",\n    \"createdAt\": \"2025-06-08T09:40:00+00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{pathUsers}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{pathUsers}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users :id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Vergie.Lindgren92\",\n    \"email\": \"josalillo@gmail.com\",\n    \"createdAt\": \"2025-06-08T09:40:00+00:00\",\n    \"updatedAt\": \"2025-06-08T09:40:00+00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{pathUsers}}/9f5a255d-b251-4baa-b191-d017e494d1ab",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{pathUsers}}",
+								"9f5a255d-b251-4baa-b191-d017e494d1ab"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDk1ODA5MDksImV4cCI6MTc0OTY2NzMwOSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiam9zYWxpbGxvQGdtYWlsLmNvbSJ9.H4DDVHgTYHp9tYeFqfKlFJsrSPiM9mje1oDeUe938NSLnBJ7dEjd0XvhoG9au_E7XtktMGnfRiNnxmOF00jLj57WRIcXH1h7OU2n0dwPthbySQWDelpXfxYdRkEp7B5Qyxd8yXpnMN0dvS-QAgD5osdtRpts9GmY7hBFzqWWA8VvqRlUsTLliv9T6dHqfGk1LDrj942Hox0nOkCU1vj5_aEqoPVqHakGr0JP_6ONHvvVa-462ZFmc-Mr_ocV3MUSWN2GyMhK0ivzU4sb-uezWz0Tf6jR8R18O4hSNilILs0hLWMLo2fCeriNqhn-Od5GMRa2HEzCKzI0hMbIrRXe4w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{pathUsers}}/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{pathUsers}}",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users :id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{pathUsers}}/6bc4f1be-0e80-4316-bc1f-dc1fe019fac3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{pathUsers}}",
+								"6bc4f1be-0e80-4316-bc1f-dc1fe019fac3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "users :id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{pathUsers}}/6bc4f1be-0e80-4316-bc1f-dc1fe019fac3",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{pathUsers}}",
+								"6bc4f1be-0e80-4316-bc1f-dc1fe019fac3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"Emely.Hamill@hotmail.com\",\n    \"password\": \"qwerty69\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WorkEntry",
+			"item": [
+				{
+					"name": "work-entries",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{$randomUUID}}\",\n    \"userId\": \"d63b8c70-e4ad-4be4-b04c-5c65e74d374d\",\n    \"startDate\": \"2025-06-10T09:40:00+00:00\",\n    \"createdAt\": \"2025-06-08T09:40:00+00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{pathWorkEntries}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{pathWorkEntries}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "work-entries :id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"{{$randomUUID}}\",\n    \"userId\": \"6bc4f1be-0e80-4316-bc1f-dc1fe019fac3\",\n    \"startDate\": \"2025-06-10T09:40:00+00:00\",\n    \"createdAt\": \"2025-06-08T09:40:00+00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{pathWorkEntries}}/d1111875-7d82-4f58-848b-ff67ce33b7a8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{pathWorkEntries}}",
+								"d1111875-7d82-4f58-848b-ff67ce33b7a8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "work-entries :id",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "work-entries :id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{pathWorkEntries}}/d1111875-7d82-4f58-848b-ff67ce33b7a8",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{pathWorkEntries}}",
+								"d1111875-7d82-4f58-848b-ff67ce33b7a8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "work-entries",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDk2Njc1MzcsImV4cCI6MTc0OTc1MzkzNywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiRW1lbHkuSGFtaWxsQGhvdG1haWwuY29tIn0.Ssav7eul4T_gW1bgX0LIr_dmdpZxEMkBtqEUbkIqw-iO87OHgUThPxRTBHsSncWKTN7Ms3-lttG40RYUCQnurjxDT_brJB-l36uwlPlJLuQIUPZN8AotqyFeWmzzGxG5YYApx0ZxAvoJnI4O7iup8cCR1HMXBJydPsRGYD4_RgdFbw0da5ko7bx0VMOPtNLJc0N9wGxT0th-rNTmeKOERSatbdyy7JuhUNPKaBC6L22TUHEFws2fkkCqZTNpHIgjCQsFHFAz8wCL_hhTRgo3YCjXS8skTeylvPFhJlU96cD1keMAS-QOXYrfx9IJ_1PKqgcSKiYm2OP1VbDm9Vy3QQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/{{pathWorkEntries}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{pathWorkEntries}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TimeTracking",
+			"item": [
+				{
+					"name": "clock-in",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDk2Njc1MzcsImV4cCI6MTc0OTc1MzkzNywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiRW1lbHkuSGFtaWxsQGhvdG1haWwuY29tIn0.Ssav7eul4T_gW1bgX0LIr_dmdpZxEMkBtqEUbkIqw-iO87OHgUThPxRTBHsSncWKTN7Ms3-lttG40RYUCQnurjxDT_brJB-l36uwlPlJLuQIUPZN8AotqyFeWmzzGxG5YYApx0ZxAvoJnI4O7iup8cCR1HMXBJydPsRGYD4_RgdFbw0da5ko7bx0VMOPtNLJc0N9wGxT0th-rNTmeKOERSatbdyy7JuhUNPKaBC6L22TUHEFws2fkkCqZTNpHIgjCQsFHFAz8wCL_hhTRgo3YCjXS8skTeylvPFhJlU96cD1keMAS-QOXYrfx9IJ_1PKqgcSKiYm2OP1VbDm9Vy3QQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"startDate\": \"2025-06-08T09:40:00+00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{pathWorkEntries}}/161e7a81-7708-4a35-bf9b-2713630c6f75/clock-in",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{pathWorkEntries}}",
+								"161e7a81-7708-4a35-bf9b-2713630c6f75",
+								"clock-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clock-out",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDk2Njc1MzcsImV4cCI6MTc0OTc1MzkzNywicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiRW1lbHkuSGFtaWxsQGhvdG1haWwuY29tIn0.Ssav7eul4T_gW1bgX0LIr_dmdpZxEMkBtqEUbkIqw-iO87OHgUThPxRTBHsSncWKTN7Ms3-lttG40RYUCQnurjxDT_brJB-l36uwlPlJLuQIUPZN8AotqyFeWmzzGxG5YYApx0ZxAvoJnI4O7iup8cCR1HMXBJydPsRGYD4_RgdFbw0da5ko7bx0VMOPtNLJc0N9wGxT0th-rNTmeKOERSatbdyy7JuhUNPKaBC6L22TUHEFws2fkkCqZTNpHIgjCQsFHFAz8wCL_hhTRgo3YCjXS8skTeylvPFhJlU96cD1keMAS-QOXYrfx9IJ_1PKqgcSKiYm2OP1VbDm9Vy3QQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"endDate\": \"2025-06-10T09:40:00+00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/{{pathWorkEntries}}/161e7a81-7708-4a35-bf9b-2713630c6f75/clock-out",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"{{pathWorkEntries}}",
+								"161e7a81-7708-4a35-bf9b-2713630c6f75",
+								"clock-out"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/health",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "inherit"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
