@@ -11,6 +11,7 @@ use App\Sesame\WorkEntry\Domain\Exceptions\WorkEntryNotFoundException;
 use App\Shared\Api\BaseController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
+use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 
 final class ClockInController extends BaseController
 {
@@ -31,6 +32,7 @@ final class ClockInController extends BaseController
             WorkEntryAlreadyClockedInException::class  => Response::HTTP_BAD_REQUEST,
             WorkEntryAlreadyClockedOutException::class => Response::HTTP_BAD_REQUEST,
             WorkEntryNotBelongToUserException::class   => Response::HTTP_FORBIDDEN,
+            UnprocessableEntityHttpException::class    => Response::HTTP_BAD_REQUEST,
         ];
     }
 }

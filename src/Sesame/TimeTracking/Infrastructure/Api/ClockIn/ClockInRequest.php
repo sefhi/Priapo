@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 final class ClockInRequest
 {
     public function __construct(
-        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<updateAt> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
+        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<startDate> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
         public ?string $startDate = null,
     ) {
     }

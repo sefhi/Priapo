@@ -31,8 +31,8 @@ final class CreateWorkEntryControllerTest extends BaseApiTestCase
         $payload = [
             'id'        => MotherCreator::id(),
             'userId'    => $userId,
-            'startDate' => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
-            'createdAt' => new \DateTimeImmutable()->format('Y-m-d H:i:s'),
+            'startDate' => MotherCreator::dateTimeFormat(),
+            'createdAt' => MotherCreator::dateTimeFormat(),
         ];
 
         // WHEN

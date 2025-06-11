@@ -38,11 +38,16 @@ final class MotherCreator
 
     public static function password(): string
     {
-        return self::random()->password();
+        return self::random()->password(minLength: 8, maxLength: 16);
     }
 
     public static function dateTime(): \DateTimeImmutable
     {
         return \DateTimeImmutable::createFromMutable(self::random()->dateTime());
+    }
+
+    public static function dateTimeFormat(string $format = \DateTimeInterface::ATOM): string
+    {
+        return self::dateTime()->format($format);
     }
 }

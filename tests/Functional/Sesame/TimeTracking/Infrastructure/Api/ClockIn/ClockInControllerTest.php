@@ -7,7 +7,6 @@ namespace Tests\Functional\Sesame\TimeTracking\Infrastructure\Api\ClockIn;
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\Functional\BaseApiTestCase;
-use Tests\Unit\Sesame\User\Domain\Entities\UserMother;
 use Tests\Unit\Sesame\WorkEntry\Domain\Entities\WorkEntryMother;
 use Tests\Utils\Factory\User\UserFactory;
 use Tests\Utils\Factory\WorkEntry\WorkEntryFactory;
@@ -29,19 +28,17 @@ final class ClockInControllerTest extends BaseApiTestCase
     public function itShouldClockInWorkEntry(): void
     {
         // GIVEN
-        $userId      = MotherCreator::id();
-        $userCreated = UserMother::random(['id' => $userId]);
-        $this->userFactory->createOne($userCreated);
+        $user = $this->getUserLogged();
 
         $workEntryId = MotherCreator::id();
         $workEntry   = WorkEntryMother::create([
             'id'     => $workEntryId,
-            'userId' => $userId,
+            'userId' => $user->id()->toString(),
         ]);
         $this->workEntryFactory->createOne($workEntry);
 
         $payload = [
-            'startDate' => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
+            'startDate' => MotherCreator::dateTime()->format(\DateTimeInterface::ATOM),
         ];
 
         // WHEN

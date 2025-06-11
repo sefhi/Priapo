@@ -7,7 +7,6 @@ namespace Tests\Functional\Sesame\TimeTracking\Infrastructure\Api\ClockOut;
 use PHPUnit\Framework\Attributes\Test;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\Functional\BaseApiTestCase;
-use Tests\Unit\Sesame\User\Domain\Entities\UserMother;
 use Tests\Unit\Sesame\WorkEntry\Domain\Entities\WorkEntryMother;
 use Tests\Utils\Factory\User\UserFactory;
 use Tests\Utils\Factory\WorkEntry\WorkEntryFactory;
@@ -29,15 +28,13 @@ final class ClockOutControllerTest extends BaseApiTestCase
     public function itShouldClockOutWorkEntry(): void
     {
         // GIVEN
-        $userId      = MotherCreator::id();
-        $userCreated = UserMother::random(['id' => $userId]);
-        $this->userFactory->createOne($userCreated);
+        $user = $this->getUserLogged();
 
         $workEntryId = MotherCreator::id();
         $startDate   = MotherCreator::dateTime();
         $workEntry   = WorkEntryMother::create([
             'id'     => $workEntryId,
-            'userId' => $userId,
+            'userId' => $user->id()->toString(),
         ]);
 
         // Clock in the work entry
@@ -45,7 +42,7 @@ final class ClockOutControllerTest extends BaseApiTestCase
         $this->workEntryFactory->createOne($workEntry);
 
         $payload = [
-            'endDate' => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
+            'endDate' => MotherCreator::dateTimeFormat(),
         ];
 
         // WHEN

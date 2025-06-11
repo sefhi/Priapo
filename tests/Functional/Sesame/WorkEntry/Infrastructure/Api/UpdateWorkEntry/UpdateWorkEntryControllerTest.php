@@ -42,10 +42,10 @@ final class UpdateWorkEntryControllerTest extends BaseApiTestCase
 
         $payload = [
             'userId'    => $userId,
-            'startDate' => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
-            'endDate'   => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
-            'createdAt' => $workEntryCreated->timestamps()->createdAt()->format('Y-m-d H:i:s'),
-            'updatedAt' => new \DateTimeImmutable()->format('Y-m-d H:i:s'),
+            'startDate' => MotherCreator::dateTimeFormat(),
+            'endDate'   => MotherCreator::dateTimeFormat(),
+            'createdAt' => MotherCreator::dateTimeFormat(),
+            'updatedAt' => MotherCreator::dateTimeFormat(),
         ];
 
         // WHEN
@@ -77,10 +77,10 @@ final class UpdateWorkEntryControllerTest extends BaseApiTestCase
         $workEntryId = MotherCreator::id();
         $payload     = [
             'userId'    => $userId,
-            'startDate' => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
-            'endDate'   => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
-            'createdAt' => new \DateTimeImmutable()->format('Y-m-d H:i:s'),
-            'updatedAt' => new \DateTimeImmutable()->format('Y-m-d H:i:s'),
+            'startDate' => MotherCreator::dateTimeFormat(),
+            'endDate'   => MotherCreator::dateTimeFormat(),
+            'createdAt' => MotherCreator::dateTimeFormat(),
+            'updatedAt' => MotherCreator::dateTimeFormat(),
         ];
 
         // WHEN
@@ -108,10 +108,10 @@ final class UpdateWorkEntryControllerTest extends BaseApiTestCase
         $workEntryId = MotherCreator::id();
         $payload     = [
             'userId'    => $userId,
-            'startDate' => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
-            'endDate'   => MotherCreator::dateTime()->format('Y-m-d H:i:s'),
-            'createdAt' => new \DateTimeImmutable()->format('Y-m-d H:i:s'),
-            'updatedAt' => new \DateTimeImmutable()->format('Y-m-d H:i:s'),
+            'startDate' => MotherCreator::dateTimeFormat(),
+            'endDate'   => MotherCreator::dateTimeFormat(),
+            'createdAt' => MotherCreator::dateTimeFormat(),
+            'updatedAt' => MotherCreator::dateTimeFormat(),
         ];
 
         // WHEN
