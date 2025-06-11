@@ -14,8 +14,8 @@ final readonly class CreateWorkEntryCommand implements Command
     public function __construct(
         public string $id,
         public string $userId,
-        public \DateTimeImmutable $startDate,
         public \DateTimeImmutable $createdAt,
+        public ?\DateTimeImmutable $startDate = null,
     ) {
     }
 }

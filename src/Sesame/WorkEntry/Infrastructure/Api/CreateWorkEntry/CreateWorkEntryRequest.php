@@ -16,12 +16,11 @@ final class CreateWorkEntryRequest
         #[Assert\NotBlank(message: '<userId> is required')]
         #[Assert\Uuid(message: '<userId> must be a valid UUID')]
         public string $userId,
-        #[Assert\NotBlank(message: '<startDate> is required')]
-        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<startDate> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
-        public string $startDate,
         #[Assert\NotBlank(message: '<createdAt> is required')]
         #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<createdAt> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
         public string $createdAt,
+        #[Assert\DateTime(format: \DateTimeInterface::ATOM, message: '<startDate> must be a valid date time in the format ' . \DateTimeInterface::ATOM)]
+        public ?string $startDate = null,
     ) {
     }
 
@@ -30,8 +29,10 @@ final class CreateWorkEntryRequest
         return new CreateWorkEntryCommand(
             $this->id,
             $this->userId,
-            new \DateTimeImmutable($this->startDate),
             new \DateTimeImmutable($this->createdAt),
+            $this->startDate
+                ? new \DateTimeImmutable($this->startDate)
+                : null,
         );
     }
 }

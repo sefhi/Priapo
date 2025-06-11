@@ -23,8 +23,8 @@ final class CreateWorkEntryCommandMother
         return new CreateWorkEntryCommand(
             id: $finalData['id'],
             userId: $finalData['userId'],
-            startDate: $finalData['startDate'],
             createdAt: $finalData['createdAt'],
+            startDate: $finalData['startDate'],
         );
     }
 }
