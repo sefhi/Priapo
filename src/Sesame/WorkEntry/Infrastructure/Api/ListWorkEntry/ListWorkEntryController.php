@@ -8,6 +8,7 @@ use App\Sesame\WorkEntry\Application\Queries\ListWorkEntry\ListWorkEntryQuery;
 use App\Shared\Api\BaseController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 final class ListWorkEntryController extends BaseController
 {
@@ -26,6 +27,9 @@ final class ListWorkEntryController extends BaseController
 
     protected function exceptions(): array
     {
-        return [];
+        return [
+            UnauthorizedHttpException::class => Response::HTTP_UNAUTHORIZED,
+
+        ];
     }
 }
