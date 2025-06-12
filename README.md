@@ -1,12 +1,7 @@
-![Symfony 6](https://img.shields.io/badge/Symfony-7.2-blueviolet)
+![Symfony 7](https://img.shields.io/badge/Symfony-7.2-blueviolet)
 ![PHP Version](https://img.shields.io/badge/php-8.4-blue.svg)
-[![CI](https://github.com/sefhirot69/template-symfony/actions/workflows/build.yml/badge.svg)](https://github.com/sefhirot69/template-symfony/actions/workflows/build.yml)
+[![CI](https://github.com/sefhi/Priapo/actions/workflows/build.yml/badge.svg)](https://github.com/sefhirot69/template-symfony/actions/workflows/build.yml)
 --------------------------------------
-
-# 🚀 Template Symfony
-
-Este es un template para Symfony 6 en php 8.4, con algunas configuraciones ya predefinidas. Para empezar a desarrollar tu propia
-API o microservicio.
 
 ## 🛠️ Requisitos
 
