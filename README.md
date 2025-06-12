@@ -1,6 +1,8 @@
 ![Symfony 7](https://img.shields.io/badge/Symfony-7.2-blueviolet)
 ![PHP Version](https://img.shields.io/badge/php-8.4-blue.svg)
 [![CI](https://github.com/sefhi/Priapo/actions/workflows/build.yml/badge.svg)](https://github.com/sefhirot69/template-symfony/actions/workflows/build.yml)
+[![Based on Template](https://img.shields.io/badge/Based%20on-sefhi%2Ftemplate--symfony-brightgreen?logo=github)](https://github.com/sefhi/template-symfony)
+
 --------------------------------------
 
 ## 🛠️ Requisitos
